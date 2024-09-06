@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIR Model Interactive - Numerical Analysis Course</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #0073e6;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #005bb5;
+            padding: 0.5rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: #004494;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: #333;
+            color: white;
+            margin-top: 2rem;
+        }
+        input[type="range"] {
+            width: 100%;
+            margin: 10px 0;
+        }
+        .slider-label {
+            display: flex;
+            justify-content: space-between;
+        }
+        .button {
+            display: inline
+			            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+            color: #fff;
+            background-color: #0073e6;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>SIR Model Interactive</h1>
+        <p>Numerical Analysis Course</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Main</a>
+        <a href="research.html">Research</a>
+        <a href="courses.html">Courses</a>
+    </nav>
+
+    <div class="container">
+        <section id="sir-model-interactive">
+            <h2>Interactive SIR Model Simulation</h2>
+            <p>Adjust the parameters below to see how they affect the spread of the disease.</p>
+
+            <div class="slider-label">
+                <label for="beta">Contact Rate (Beta): <span id="beta-value">0.3</span></label>
+            </div>
+            <input type="range" id="beta" min="0.1" max="1.0" step="0.1" value="0.3" oninput="updatePlot()">
+
+            <div class="slider-label">
+                <label for="gamma">Recovery Rate (Gamma): <span id="gamma-value">0.1</span></label>
+            </div>
+            <input type="range" id="gamma" min="0.05" max="0.5" step="0.05" value="0.1" oninput="updatePlot()">
+
+            <div id="plot"></div>
+
+            <a href="sir_model_explaination.html" class="button">Go to SIR Model Explanation</a>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Montri Maleewong. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function sirModel(N, I0, R0, beta, gamma, t) {
+            let S0 = N - I0 - R0;
+            let S = [S0], I = [I0], R = [R0];
+            let dt = t[1] - t[0];
+            
+            for (let i = 1; i < t.length; i++) {
+                let dS = -beta * S[i-1] * I[i-1] / N * dt;
+                let dI = (beta * S[i-1] * I[i-1] / N - gamma * I[i-1]) * dt;
+                let dR = gamma * I[i-1] * dt;
+
+                S.push(S[i-1] + dS);
+                I.push(I[i-1] + dI);
+                R.push(R[i-1] + dR);
+            }
+            return [S, I, R];
+        }
+
+        function updatePlot() {
+            let beta = parseFloat(document.getElementById('beta').value);
+            let gamma = parseFloat(document.getElementById('gamma').value);
+            document.getElementById('beta-value').textContent = beta;
+            document.getElementById('gamma-value').textContent = gamma;
+
+            let N = 1000;
+            let I0 = 1;
+            let R0 = 0;
+            let t = Array.from({length: 160}, (_, i) => i);
+
+            let [S, I, R] = sirModel(N, I0, R0, beta, gamma, t);
+
+            let traceS = {x: t, y: S, mode: 'lines', name: 'Susceptible', line: {color: 'blue'}};
+            let traceI = {x: t, y: I, mode: 'lines', name: 'Infected', line: {color: 'red'}};
+            let traceR = {x: t, y: R, mode: 'lines', name: 'Recovered', line: {color: 'green'}};
+
+            let layout = {
+                title: 'SIR Model Simulation',
+                xaxis: {title: 'Time (days)'},
+                yaxis: {title: 'Number of People'}
+            };
+
+            Plotly.newPlot('plot', [traceS, traceI, traceR], layout);
+        }
+
+        // Initialize plot
+        updatePlot();
+    </script>
+
+</body>
+</html>
+

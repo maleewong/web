@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SIR Model Explanation - Numerical Analysis Course</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #0073e6;
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #005bb5;
+            padding: 0.5rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: #004494;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: #333;
+            color: white;
+            margin-top: 2rem;
+        }
+        pre {
+            background-color: #f4f4f4;
+            padding: 1rem;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+        }
+        .comment {
+            color: green;
+        }
+        .keyword {
+            color: blue;
+            font-weight: bold;
+        }
+        .string {
+            color: brown;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 20px;
+            color: #fff;
+            background-color: #0073e6;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>SIR Model Explanation</h1>
+        <p>Numerical Analysis Course</p>
+    </header>
+
+    <nav>
+        <a href="index.html">Main</a>
+        <a href="research.html">Research</a>
+        <a href="courses.html">Courses</a>
+    </nav>
+
+    <div class="container">
+        <section id="sir-model">
+            <h2>Mathematical Model and Python Code</h2>
+            <p>The SIR model is a simple mathematical model to describe the spread of a disease in a population. It consists of three compartments:</p>
+            <ul>
+                <li><strong>S</strong>: Susceptible - individuals who can contract the disease.</li>
+                <li><strong>I</strong>: Infected - individuals who have contracted the disease and can spread it.</li>
+                <li><strong>R</strong>: Recovered - individuals who have recovered from the disease and are immune.</li>
+            </ul>
+
+            <h3>Mathematical Model</h3>
+            <p>The SIR model can be represented by the following system of differential equations:</p>
+            <p>
+                \[
+                \frac{dS}{dt} = -\beta \frac{S I}{N}
+                \]
+            </p>
+            <p>
+                \[
+                \frac{dI}{dt} = \beta \frac{S I}{N} - \gamma I
+                \]
+            </p>
+            <p>
+                \[
+                \frac{dR}{dt} = \gamma I
+                \]
+            </p>
+            <p>Where:</p>
+            <ul>
+                <li>\(S(t)\): Number of susceptible individuals at time \(t\)</li>
+                <li>\(I(t)\): Number of infected individuals at time \(t\)</li>
+                <li>\(R(t)\): Number of recovered individuals at time \(t\)</li>
+                <li>\(\beta\): Contact rate</li>
+                <li>\(\gamma\): Recovery rate</li>
+                <li>\(N = S(t) + I(t) + R(t)\): Total population, assumed to be constant</li>
+            </ul>
+
+            <h3>Python Code for SIR Model</h3>
+            <pre><code>
+<span class="comment"># Import necessary libraries</span>
+<span class="keyword">import</span> numpy <span class="keyword">as</span> np
+<span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
+<span class="keyword">from</span> scipy.integrate <span class="keyword">import</span> odeint
+
+<span class="comment"># Total population, N.</span>
+N = 1000
+<span class="comment"># Initial number of infected and recovered individuals, I0 and R0.</span>
+I0, R0 = 1, 0
+<span class="comment"># Everyone else, S0, is susceptible to infection initially.</span>
+S0 = N - I0 - R0
+<span class="comment"># Contact rate, beta, and mean recovery rate, gamma, (in 1/days).</span>
+beta, gamma = 0.3, 1./10 
+<span class="comment"># A grid of time points (in days)</span>
+t = np.linspace(0, 160, 160)
+
+<span class="comment"># The SIR model differential equations.</span>
+<span class="keyword">def</span> deriv(y, t, N, beta, gamma):
+    S, I, R = y
+    dSdt = -beta * S * I / N
+    dIdt = beta * S * I / N - gamma * I
+    dRdt = gamma * I
+    <span class="keyword">return</span> dSdt, dIdt, dRdt
+
+<span class="comment"># Initial conditions vector</span>
+y0 = S0, I0, R0
+<span class="comment"># Integrate the SIR equations over the time grid, t.</span>
+ret = odeint(deriv, y0, t, args=(N, beta, gamma))
+S, I, R = ret.T
+
+<span class="comment"># Plot the data</span>
+plt.figure(figsize=(10, 6))
+plt.plot(t, S, 'b', label=<span class="string">'Susceptible'</span>)
+plt.plot(t, I, 'r', label=<span class="string">'Infected'</span>)
+plt.plot(t, R, 'g', label=<span class="string">'Recovered'</span>)
+plt.xlabel(<span class="string">'Time /days'</span>)
+plt.ylabel(<span class="string">'Number'</span>)
+plt.title(<span class="string">'SIR Model'</span>)
+plt.legend()
+plt.show()
+            </code></pre>
+
+            <a href="sir_model_interactive.html" class="button">Go to Interactive SIR Model</a>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 Montri Maleewong. All rights reserved.</p>
+    </footer>
+
+</body>
+</html>
