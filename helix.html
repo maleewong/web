@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>3D Circular Helix Plot</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        header {
+            background-color: #0073e6; /* Same blue as index page */
+            color: white;
+            text-align: center;
+            padding: 1rem 0;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #005bb5; /* Darker blue for navigation */
+            padding: 0.5rem;
+        }
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            margin: 0 0.5rem;
+            border-radius: 5px;
+        }
+        nav a:hover {
+            background-color: #004494;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 1rem;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        .slider-container {
+            margin: 20px 0;
+        }
+        .slider-label {
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+        input[type="range"] {
+            width: 100%;
+        }
+        #latex-container {
+            font-size: 1.2em;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: #333;
+            color: white;
+            margin-top: 2rem;
+        }
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            margin-top: 10px;
+            color: white;
+            background-color: #607d8b;
+            text-align: center;
+            cursor: pointer;
+            border-radius: 5px;
+            text-decoration: none;
+        }
+        .button:hover {
+            background-color: #546e7a;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Circular Helix Plot</h1>
+    <p>Mathematics of Circular Helix</p>
+</header>
+
+<nav>
+    <a href="index.html">Main</a>
+    <a href="courses.html">Courses</a>
+</nav>
+
+<div class="container">
+    <div id="latex-container">
+        <!-- LaTeX expression for the vector function -->
+        The parametric equation for the circular helix is: <br><br>
+        $$ \vec{r}(t) = a \cos(t) \hat{i} + a \sin(t) \hat{j} + c t \hat{k}, \, \text{where} \, 0 \leq t \leq n\pi $$
+    </div>
+
+    <div id="plot"></div>
+
+    <!-- Slider for Radius a -->
+    <div class="slider-container">
+        <div class="slider-label">Radius (a): <span id="a-value">1</span></div>
+        <input type="range" id="a-slider" min="0.5" max="5" step="0.1" value="1" oninput="updatePlot()">
+    </div>
+
+    <!-- Slider for Vertical Spacing c -->
+    <div class="slider-container">
+        <div class="slider-label">Vertical Spacing (c): <span id="c-value">1</span></div>
+        <input type="range" id="c-slider" min="0.5" max="5" step="0.1" value="1" oninput="updatePlot()">
+    </div>
+
+    <!-- Slider for t Range -->
+    <div class="slider-container">
+        <div class="slider-label">t Range (0 to nπ): <span id="n-value">2</span>π</div>
+        <input type="range" id="t-slider" min="1" max="10" step="1" value="2" oninput="updatePlot()">
+    </div>
+
+    <a href="courses.html" class="button">Back to Courses</a>
+</div>
+
+<footer>
+    <p>&copy; 2024 Montri Maleewong. All rights reserved.</p>
+</footer>
+
+<script>
+    function updatePlot() {
+        let a = parseFloat(document.getElementById("a-slider").value);
+        let c = parseFloat(document.getElementById("c-slider").value);
+        let n = parseInt(document.getElementById("t-slider").value);
+
+        document.getElementById("a-value").textContent = a;
+        document.getElementById("c-value").textContent = c;
+        document.getElementById("n-value").textContent = n;
+
+        let tMax = n * Math.PI;  // Maximum value of t, depending on nπ
+
+        let t = [];
+        let x = [];
+        let y = [];
+        let z = [];
+        
+        // Parametric equation for circular helix
+        for (let i = 0; i <= 100; i++) {
+            let ti = tMax * (i / 100);  // t from 0 to tMax
+            t.push(ti);
+            x.push(a * Math.cos(ti));
+            y.push(a * Math.sin(ti));
+            z.push(c * ti);
+        }
+
+        // Plot the helix
+        let trace = {
+            x: x,
+            y: y,
+            z: z,
+            mode: 'lines',
+            type: 'scatter3d',
+            line: {
+                color: 'blue',
+                width: 4
+            }
+        };
+
+        let layout = {
+            scene: {
+                xaxis: { title: 'X' },
+                yaxis: { title: 'Y' },
+                zaxis: { title: 'Z' }
+            },
+            margin: { t: 0 }
+        };
+
+        Plotly.newPlot('plot', [trace], layout);
+    }
+
+    // Initial plot
+    updatePlot();
+</script>
+
+</body>
+</html>
+

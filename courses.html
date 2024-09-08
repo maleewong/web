@@ -42,7 +42,6 @@
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
         }
-        /* Course boxes with light blue and green theme */
         .course-box {
             border-radius: 8px;
             padding: 20px;
@@ -62,13 +61,6 @@
         .course-box p {
             margin-bottom: 10px;
         }
-        footer {
-            text-align: center;
-            padding: 1rem 0;
-            background-color: #333;
-            color: white;
-            margin-top: 2rem;
-        }
         .button {
             display: inline-block;
             padding: 10px 20px;
@@ -83,6 +75,13 @@
         }
         .button:hover {
             background-color: #546e7a;
+        }
+        footer {
+            text-align: center;
+            padding: 1rem 0;
+            background-color: #333;
+            color: white;
+            margin-top: 2rem;
         }
     </style>
 </head>
@@ -101,11 +100,18 @@
 
     <div class="container">
         <!-- Calculus II -->
-        <div class="course-box calculus">
-            <h2>Calculus II</h2>
-            <p>This course covers many topics in calculus, including differentiation and integration for functions of several variables, quadratic surface, and polar coordinates. It also explores applications of integrals in areas like science and engineering.</p>
-            <a href="quadratic.html" class="button">Quadratic Surface</a>
-        </div>
+		<div class="course-box calculus">
+			<h2>Calculus</h2>
+			<p>This course covers many topics in calculus, including differentiation and integration for functions of several variables, quadratic surfaces, and polar coordinates. It also explores applications of integrals in areas like science and engineering.</p>
+    
+			<!-- Quadratic Surface Button -->
+			<p>
+			<a href="quadratic.html" class="button">Quadratic Surface</a>
+            <br>    
+			<a href="helix.html" class="button" style="margin-top: 15px;">Circular Helix</a>
+			<p>
+	</div>
+
 
         <!-- Numerical Analysis -->
         <div class="course-box numerical-analysis">
@@ -113,12 +119,13 @@
             <p>This course covers a wide range of numerical methods for solving mathematical problems. It includes root finding, interpolation, numerical integration and differentiation, and the numerical solution of differential equations.</p>
             <a href="sir_model_explaination.html" class="button">SIR Model Example</a>
         </div>
-
-        <!-- Add more courses as needed -->
     </div>
 
-	<footer>
-        <p> </p>
+    <footer>
+        <p>&copy; 2024 Montri Maleewong. All rights reserved.</p>
     </footer>
+
+</body>
+</html>
 
 
