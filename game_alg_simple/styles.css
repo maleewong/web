@@ -1,5 +1,8 @@
+/* Font: Quicksand for clean mobile readability */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+
 body {
-  font-family: 'Comic Sans MS', cursive, sans-serif;
+  font-family: 'Quicksand', sans-serif;
   text-align: center;
   background: linear-gradient(to bottom right, #ffe29f, #ffa99f);
   margin: 0;
@@ -8,7 +11,8 @@ body {
 
 h1 {
   color: #2c3e50;
-  text-shadow: 1px 1px #fff;
+  font-size: 2.2rem;
+  margin-bottom: 10px;
 }
 
 .game-container {
@@ -16,7 +20,7 @@ h1 {
   max-width: 700px;
   padding: 20px;
   border-radius: 20px;
-  background-color: #ffffffcc;
+  background-color: #ffffffdd;
   box-shadow: 0 10px 30px rgba(0,0,0,0.2);
 }
 
@@ -27,16 +31,19 @@ h1 {
   background-color: #f39c12;
   color: white;
   border: none;
-  border-radius: 10px;
+  border-radius: 12px;
   cursor: pointer;
   transition: all 0.3s ease;
 }
 
 #start-button:hover {
   background-color: #e67e22;
+  transform: scale(1.05);
 }
 
-#timer, #score-board, #mistakes-board {
+#timer,
+#score-board,
+#mistakes-board {
   font-size: 18px;
   margin-top: 10px;
 }
@@ -46,13 +53,14 @@ h1 {
   grid-template-columns: repeat(4, 1fr);
   gap: 12px;
   margin: 20px 0;
+  padding: 0 10px;
 }
 
 .card {
   background-color: #fff;
   border: 2px solid #ccc;
   padding: 20px;
-  font-size: 18px;
+  font-size: 22px;
   border-radius: 12px;
   cursor: pointer;
   transition: transform 0.2s ease;
@@ -64,15 +72,34 @@ h1 {
   transform: scale(1.05);
 }
 
-.card.correct {
-  background-color: #2ecc71;
-  color: #fff;
-  border-color: #27ae60;
-}
-
 .card.matched {
   background-color: #9b59b6;
   color: white;
   font-weight: bold;
   border: 2px solid #8e44ad;
+}
+
+/* Mobile Optimization */
+@media screen and (max-width: 600px) {
+  h1 {
+    font-size: 1.8rem;
+  }
+
+  #start-button {
+    font-size: 1.1rem;
+    padding: 12px 20px;
+  }
+
+  #game-board {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .card {
+    font-size: 20px;
+    padding: 16px;
+  }
+
+  #score-board, #mistakes-board, #timer {
+    font-size: 16px;
+  }
 }
