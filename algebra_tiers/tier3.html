@@ -1,0 +1,203 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tier 3: Exponents & Roots</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fef6f0;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      color: #2c2c54;
+    }
+    .level {
+      background: #ffffff;
+      margin: 1rem auto;
+      max-width: 650px;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+    .level h2 {
+      color: #e17055;
+      margin-top: 0;
+    }
+    .start-btn, .close-btn {
+      background-color: #d63031;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .close-btn {
+      background-color: #636e72;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      background-color: #2d3436;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .content-box {
+      background-color: #fff3e0;
+      border-left: 5px solid #e17055;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 6px;
+    }
+    .content-box p {
+      margin: 0.5rem 0;
+    }
+  </style>
+  <script>
+    function toggleLevel(id) {
+      const boxes = document.querySelectorAll('.content-box');
+      boxes.forEach(box => box.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+    function closeLevel(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+  </script>
+</head>
+<body>
+  <h1>Tier 3: Exponents & Roots</h1>
+
+  <div class="level">
+    <h2>Level 3.1 – Laws of Exponents</h2>
+    <p>Understand and apply the basic rules of exponents like \( a^m \cdot a^n = a^{m+n} \)</p>
+    <button class="start-btn" onclick="toggleLevel('level1')">Start</button>
+    <div id="level1" class="content-box" style="display: none;">
+      <h3>🧠 Key Laws of Exponents:</h3>
+      <ul>
+        <li>\( a^m \cdot a^n = a^{m+n} \)</li>
+        <li>\( (a^m)^n = a^{mn} \)</li>
+        <li>\( (ab)^n = a^n \cdot b^n \)</li>
+        <li>\( \frac{a^m}{a^n} = a^{m-n} \), where \( a \ne 0 \)</li>
+      </ul>
+
+      <h3>✏️ Example:</h3>
+      <p>\( x^3 \cdot x^2 = x^5 \)</p>
+      <p>\( (2^3)^2 = 2^6 = 64 \)</p>
+
+      <h3>✅ Try This:</h3>
+      <ol>
+        <li>\( x^4 \cdot x^3 \) → <strong>Answer:</strong> \( x^7 \)</li>
+        <li>\( (a^2)^3 \) → <strong>Answer:</strong> \( a^6 \)</li>
+        <li>\( (2x)^3 \) → <strong>Answer:</strong> \( 8x^3 \)</li>
+      </ol>
+
+      <button class="close-btn" onclick="closeLevel('level1')">Close</button>
+    </div>
+  </div>
+
+<div class="level">
+  <h2>Level 3.2 – Zero & Negative Exponents</h2>
+  <p>Learn the meaning of \( x^0 = 1 \) and \( x^{-n} = \frac{1}{x^n} \)</p>
+  <button class="start-btn" onclick="toggleLevel('level2')">Start</button>
+  <div id="level2" class="content-box" style="display: none;">
+    <h3>🧠 Zero Exponent Rule</h3>
+    <p>Any non-zero number raised to the power of zero equals 1:</p>
+    <p>\[ a^0 = 1 \quad \text{(for } a \ne 0\text{)} \]</p>
+
+    <h3>✏️ Examples:</h3>
+    <ul>
+      <li>\( 5^0 = 1 \)</li>
+      <li>\( (-3)^0 = 1 \)</li>
+      <li>\( (x^2)^0 = 1 \)</li>
+    </ul>
+
+    <h3>🧠 Negative Exponent Rule</h3>
+    <p>A negative exponent means you take the reciprocal:</p>
+    <p>\[ a^{-n} = \frac{1}{a^n} \]</p>
+
+    <h3>✏️ Examples:</h3>
+    <ul>
+      <li>\( 2^{-3} = \frac{1}{2^3} = \frac{1}{8} \)</li>
+      <li>\( x^{-4} = \frac{1}{x^4} \)</li>
+      <li>\( \left(\frac{3}{4}\right)^{-2} = \left(\frac{4}{3}\right)^2 = \frac{16}{9} \)</li>
+    </ul>
+
+    <h3>✅ Try These</h3>
+    <ol>
+      <li>\( 10^0 \) → <strong>Answer:</strong> 1</li>
+      <li>\( x^{-2} \) → <strong>Answer:</strong> \( \frac{1}{x^2} \)</li>
+      <li>\( \left(\frac{5}{2}\right)^{-1} \) → <strong>Answer:</strong> \( \frac{2}{5} \)</li>
+    </ol>
+
+    <button class="close-btn" onclick="closeLevel('level2')">Close</button>
+  </div>
+</div>
+
+<div class="level">
+  <h2>Level 3.3 – Square & Cube Roots</h2>
+  <p>Understand square roots and cube roots like \( \sqrt{9} = 3 \) or \( \sqrt[3]{27} = 3 \)</p>
+  <button class="start-btn" onclick="toggleLevel('level3')">Start</button>
+  <div id="level3" class="content-box" style="display: none;">
+    <h3>🧠 Square and Cube Roots</h3>
+    <p>The square root of a number \( x \) is a number \( y \) such that \( y^2 = x \).</p>
+    <p>The cube root of a number \( x \) is a number \( y \) such that \( y^3 = x \).</p>
+
+    <h3>✏️ Examples:</h3>
+    <ul>
+      <li>\( \sqrt{16} = 4 \) because \( 4^2 = 16 \)</li>
+      <li>\( \sqrt{100} = 10 \)</li>
+      <li>\( \sqrt[3]{27} = 3 \) because \( 3^3 = 27 \)</li>
+      <li>\( \sqrt[3]{-8} = -2 \) because \( (-2)^3 = -8 \)</li>
+    </ul>
+
+    <h3>✅ Try These</h3>
+    <ol>
+      <li>\( \sqrt{81} \) → <strong>Answer:</strong> 9</li>
+      <li>\( \sqrt[3]{64} \) → <strong>Answer:</strong> 4</li>
+      <li>\( \sqrt[3]{-27} \) → <strong>Answer:</strong> -3</li>
+    </ol>
+
+    <button class="close-btn" onclick="closeLevel('level3')">Close</button>
+  </div>
+</div>
+
+<div class="level">
+  <h2>Level 3.4 – Rational Exponents</h2>
+  <p>Learn how fractional exponents work: \( a^{1/n} = \sqrt[n]{a} \), \( a^{m/n} = \sqrt[n]{a^m} \)</p>
+  <button class="start-btn" onclick="toggleLevel('level4')">Start</button>
+  <div id="level4" class="content-box" style="display: none;">
+    <h3>🧠 What Are Rational Exponents?</h3>
+    <p>Rational exponents are another way to write roots using powers. The denominator tells the root, and the numerator tells the power:</p>
+    <p>\[ a^{1/n} = \sqrt[n]{a}, \quad a^{m/n} = \sqrt[n]{a^m} \]</p>
+
+    <h3>✏️ Examples:</h3>
+    <ul>
+      <li>\( 8^{1/3} = \sqrt[3]{8} = 2 \)</li>
+      <li>\( 16^{1/2} = \sqrt{16} = 4 \)</li>
+      <li>\( 27^{2/3} = \sqrt[3]{27^2} = \sqrt[3]{729} = 9 \)</li>
+      <li>\( 81^{3/4} = \sqrt[4]{81^3} = \sqrt[4]{531441} = 27 \)</li>
+    </ul>
+
+    <h3>✅ Try These</h3>
+    <ol>
+      <li>\( 64^{1/2} \) → <strong>Answer:</strong> 8</li>
+      <li>\( 125^{2/3} \) → <strong>Answer:</strong> 25</li>
+      <li>\( 100^{3/2} \) → <strong>Answer:</strong> 1000</li>
+    </ol>
+
+    <button class="close-btn" onclick="closeLevel('level4')">Close</button>
+  </div>
+</div>

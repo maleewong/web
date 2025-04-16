@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tier 5: Systems of Equations</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f9f9;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      color: #006266;
+    }
+    .level {
+      background: #ffffff;
+      margin: 1rem auto;
+      max-width: 700px;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+    .level h2 {
+      color: #0a3d62;
+      margin-top: 0;
+    }
+    .start-btn, .close-btn {
+      background-color: #009432;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .close-btn {
+      background-color: #8395a7;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      background-color: #2d3436;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .content-box {
+      background-color: #e6f9f8;
+      border-left: 5px solid #009432;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 6px;
+    }
+    .content-box p {
+      margin: 0.5rem 0;
+    }
+  </style>
+  <script>
+    function toggleLevel(id) {
+      const boxes = document.querySelectorAll('.content-box');
+      boxes.forEach(box => box.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+    function closeLevel(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+  </script>
+</head>
+<body>
+  <h1>Tier 5: Systems of Equations</h1>
+
+  <div class="level">
+    <h2>Level 5.1 – Substitution Method</h2>
+    <p>Solve systems by substituting one equation into the other.</p>
+    <button class="start-btn" onclick="toggleLevel('level1')">Start</button>
+    <div id="level1" class="content-box" style="display: none;">
+      <h3>✏️ Example 1</h3>
+      <p>\( y = 2x + 1 \), \( 3x + y = 16 \)</p>
+      <p>Substitute: \( 3x + (2x + 1) = 16 \Rightarrow 5x = 15 \Rightarrow x = 3 \)<br>\( y = 2(3) + 1 = 7 \) → Solution: \( (3, 7) \)</p>
+
+      <h3>✏️ Example 2</h3>
+      <p>\( y = x - 4 \), \( x + y = 10 \)</p>
+      <p>Substitute into second: \( x + (x - 4) = 10 \Rightarrow 2x = 14 \Rightarrow x = 7 \)<br>\( y = 3 \)</p>
+
+      <h3>✏️ Example 3</h3>
+      <p>\( x = 2y \), \( 3x + y = 14 \)</p>
+      <p>\( 3(2y) + y = 14 \Rightarrow 7y = 14 \Rightarrow y = 2 \), \( x = 4 \)</p>
+
+      <h3>✏️ Example 4</h3>
+      <p>\( y = -x + 5 \), \( 2x + y = 1 \)</p>
+      <p>Substitute: \( 2x + (-x + 5) = 1 \Rightarrow x = -4 \), \( y = 9 \)</p>
+
+      <button class="close-btn" onclick="closeLevel('level1')">Close</button>
+    </div>
+  </div>
+
+  <div class="level">
+    <h2>Level 5.2 – Elimination Method</h2>
+    <p>Solve systems by adding or subtracting equations to eliminate one variable.</p>
+    <button class="start-btn" onclick="toggleLevel('level2')">Start</button>
+    <div id="level2" class="content-box" style="display: none;">
+      <h3>✏️ Example 1</h3>
+      <p>\( x + y = 5 \), \( x - y = 1 \)<br>Add equations: \( 2x = 6 \Rightarrow x = 3 \), \( y = 2 \)</p>
+
+      <h3>✏️ Example 2</h3>
+      <p>\( 2x + 3y = 12 \), \( -2x + y = 0 \)<br>Add: \( 4y = 12 \Rightarrow y = 3 \), \( x = 1.5 \)</p>
+
+      <h3>✏️ Example 3</h3>
+      <p>\( 3x + 2y = 16 \), \( 6x + 4y = 32 \)<br>Multiply first by 2 and subtract → Infinite solutions</p>
+
+      <h3>✏️ Example 4</h3>
+      <p>\( 4x + 2y = 8 \), \( 2x - 2y = 0 \)<br>Add: \( 6x = 8 \Rightarrow x = \frac{4}{3}, y = \frac{2}{3} \)</p>
+
+      <button class="close-btn" onclick="closeLevel('level2')">Close</button>
+    </div>
+  </div>
+
+  <div class="level">
+    <h2>Level 5.3 – Word Problems with Systems</h2>
+    <p>Translate word problems into equations and solve using substitution or elimination.</p>
+    <button class="start-btn" onclick="toggleLevel('level3')">Start</button>
+    <div id="level3" class="content-box" style="display: none;">
+      <h3>✏️ Example 1</h3>
+      <p>Tom and Tai have 24 coins. Tom has 4 more than Tai. How many each?</p>
+      <p>\( a + b = 24 \), \( a = b + 4 \) → \( b = 10, a = 14 \)</p>
+
+      <h3>✏️ Example 2</h3>
+      <p>Tickets cost 10 Baht for adults, 5 Baht for students. 5 tickets total 35 Baht. Find numbers.</p>
+      <p>\( a + s = 5 \), \( 10a + 5s = 35 \) → \( s = 3, a = 2 \)</p>
+
+      <h3>✏️ Example 3</h3>
+      <p>A rectangle's perimeter is 50, length is 3 more than width. Find dimensions.</p>
+      <p>\( 2l + 2w = 50 \), \( l = w + 3 \) → \( w = 11, l = 14 \)</p>
+
+      <h3>✏️ Example 4</h3>
+      <p>Two numbers sum to 30, and their difference is 4. What are they?</p>
+      <p>\( x + y = 30 \), \( x - y = 4 \) → \( x = 17, y = 13 \)</p>
+
+      <button class="close-btn" onclick="closeLevel('level3')">Close</button>
+    </div>
+  </div>
+
+  <a href="index.html" class="back-btn">⬅ Back to Tiers</a>
+</body>
+</html>

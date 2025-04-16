@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tier 4: Quadratics</title>
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f3f3fd;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      color: #2c2c54;
+    }
+    .level {
+      background: #ffffff;
+      margin: 1rem auto;
+      max-width: 700px;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+    .level h2 {
+      color: #6c5ce7;
+      margin-top: 0;
+    }
+    .start-btn, .close-btn {
+      background-color: #6c5ce7;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .close-btn {
+      background-color: #636e72;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      background-color: #2d3436;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .content-box {
+      background-color: #f8f0ff;
+      border-left: 5px solid #6c5ce7;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 6px;
+    }
+    .content-box p {
+      margin: 0.5rem 0;
+    }
+  </style>
+  <script>
+    function toggleLevel(id) {
+      const boxes = document.querySelectorAll('.content-box');
+      boxes.forEach(box => box.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+    function closeLevel(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+  </script>
+</head>
+<body>
+  <h1>Tier 4: Quadratics</h1>
+
+<div class="level">
+  <h2>Level 4.1 – Factoring Quadratics</h2>
+  <p>Factor equations like \( x^2 + 5x + 6 = 0 \) into two binomials.</p>
+  <button class="start-btn" onclick="toggleLevel('level1')">Start</button>
+  <div id="level1" class="content-box" style="display: none;">
+    <h3>🧠 What is Factoring a Quadratic?</h3>
+    <p>We want to write the quadratic in the form \( (x + m)(x + n) = 0 \) such that \( m \cdot n = c \) and \( m + n = b \).</p>
+
+    <h3>✏️ Example 1</h3>
+    <p>\( x^2 + 5x + 6 = 0 \)</p>
+    <p>We find two numbers that multiply to 6 and add to 5 → (2 and 3)</p>
+    <p>So: \( (x + 2)(x + 3) = 0 \)</p>
+
+    <h3>✏️ Example 2</h3>
+    <p>\( x^2 - 7x + 12 = 0 \)</p>
+    <p>We find two numbers that multiply to 12 and add to -7 → (-3 and -4)</p>
+    <p>So: \( (x - 3)(x - 4) = 0 \)</p>
+
+    <h3>✅ Try These</h3>
+    <ol>
+      <li>\( x^2 + 4x + 3 \) → <strong>Answer:</strong> \( (x + 1)(x + 3) \)</li>
+      <li>\( x^2 - 5x + 6 \) → <strong>Answer:</strong> \( (x - 2)(x - 3) \)</li>
+      <li>\( x^2 + x - 6 \) → <strong>Answer:</strong> \( (x + 3)(x - 2) \)</li>
+    </ol>
+
+    <button class="close-btn" onclick="closeLevel('level1')">Close</button>
+  </div>
+</div>
+
+<div class="level">
+  <h2>Level 4.2 – Solving by Factoring</h2>
+  <p>Solve equations like \( x^2 + 3x - 10 = 0 \) using factored form.</p>
+  <button class="start-btn" onclick="toggleLevel('level2')">Start</button>
+  <div id="level2" class="content-box" style="display: none;">
+    <h3>🧠 Solving by Factoring</h3>
+    <p>Once the quadratic is factored, use the Zero Product Property:</p>
+    <p>\( (x + a)(x + b) = 0 \Rightarrow x + a = 0 \text{ or } x + b = 0 \)</p>
+
+    <h3>✏️ Example 1</h3>
+    <p>\( x^2 + 3x - 10 = 0 \)</p>
+    <p>Factor: \( (x + 5)(x - 2) = 0 \)<br> Solutions: \( x = -5 \), \( x = 2 \)</p>
+
+    <h3>✏️ Example 2</h3>
+    <p>\( x^2 - 4x - 12 = 0 \)</p>
+    <p>Factor: \( (x - 6)(x + 2) = 0 \)<br> Solutions: \( x = 6 \), \( x = -2 \)</p>
+
+    <h3>✅ Try These</h3>
+    <ol>
+      <li>\( x^2 - x - 12 = 0 \) → <strong>Answer:</strong> \( x = 4,\ -3 \)</li>
+      <li>\( x^2 + 7x + 10 = 0 \) → <strong>Answer:</strong> \( x = -2,\ -5 \)</li>
+      <li>\( x^2 - 9 = 0 \) → <strong>Answer:</strong> \( x = \pm3 \) (difference of squares)</li>
+    </ol>
+
+    <button class="close-btn" onclick="closeLevel('level2')">Close</button>
+  </div>
+</div>
+
+
+<div class="level">
+  <h2>Level 4.3 – Square Root Method</h2>
+  <p>Solve quadratics like \( x^2 = 49 \) using square roots.</p>
+  <button class="start-btn" onclick="toggleLevel('level3')">Start</button>
+  <div id="level3" class="content-box" style="display: none;">
+    <h3>🧠 When to Use the Square Root Method?</h3>
+    <p>Use it when the quadratic is in the form \( x^2 = a \) or \( (x + c)^2 = a \).</p>
+    <p>Take the square root of both sides and include ± in the solution.</p>
+
+    <h3>✏️ Example 1</h3>
+    <p>\( x^2 = 49 \)<br> \( x = \pm\sqrt{49} = \pm7 \)</p>
+
+    <h3>✏️ Example 2</h3>
+    <p>\( x^2 = 20 \)<br> \( x = \pm\sqrt{20} = \pm2\sqrt{5} \)</p>
+
+    <h3>✏️ Example 3</h3>
+    <p>\( (x - 3)^2 = 36 \)<br> \( x - 3 = \pm6 \) → \( x = 9 \) or \( x = -3 \)</p>
+
+    <h3>✏️ Example 4</h3>
+    <p>\( (x + 4)^2 = 12 \)<br> \( x + 4 = \pm\sqrt{12} = \pm2\sqrt{3} \) → \( x = -4 \pm 2\sqrt{3} \)</p>
+
+    <h3>✅ Try These</h3>
+    <ol>
+      <li>\( x^2 = 64 \) → <strong>Answer:</strong> \( x = \pm8 \)</li>
+      <li>\( x^2 = 18 \) → <strong>Answer:</strong> \( x = \pm3\sqrt{2} \)</li>
+      <li>\( (x - 2)^2 = 49 \) → <strong>Answer:</strong> \( x = 9 \) or \( -5 \)</li>
+      <li>\( (x + 1)^2 = 5 \) → <strong>Answer:</strong> \( x = -1 \pm\sqrt{5} \)</li>
+    </ol>
+
+    <button class="close-btn" onclick="closeLevel('level3')">Close</button>
+  </div>
+</div>
+
+<div class="level">
+  <h2>Level 4.4 – Quadratic Formula</h2>
+  <p>Use the formula \( x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \) to solve any quadratic.</p>
+  <button class="start-btn" onclick="toggleLevel('level4')">Start</button>
+  <div id="level4" class="content-box" style="display: none;">
+    <h3>🧠 The Quadratic Formula</h3>
+    <p>For any equation \( ax^2 + bx + c = 0 \), use:</p>
+    <p>\[ x = \frac{-b \pm \sqrt{b^2 - 4ac}}{2a} \]</p>
+
+    <h3>✏️ Example 1</h3>
+    <p>\( x^2 - 6x + 5 = 0 \)</p>
+    <p>\( a = 1, b = -6, c = 5 \)</p>
+    <p>\( x = \frac{-(-6) \pm \sqrt{(-6)^2 - 4(1)(5)}}{2(1)} = \frac{6 \pm \sqrt{36 - 20}}{2} = \frac{6 \pm \sqrt{16}}{2} = 4, 2 \)</p>
+
+    <h3>✏️ Example 2</h3>
+    <p>\( x^2 + 4x + 1 = 0 \)</p>
+    <p>\( x = \frac{-4 \pm \sqrt{16 - 4}}{2} = \frac{-4 \pm \sqrt{12}}{2} = \frac{-4 \pm 2\sqrt{3}}{2} = -2 \pm \sqrt{3} \)</p>
+
+    <h3>✏️ Example 3</h3>
+    <p>\( 2x^2 + 3x - 2 = 0 \)</p>
+    <p>\( x = \frac{-3 \pm \sqrt{9 + 16}}{4} = \frac{-3 \pm \sqrt{25}}{4} = \frac{-3 \pm 5}{4} \Rightarrow x = \frac{1}{2}, -2 \)</p>
+
+    <h3>✏️ Example 4</h3>
+    <p>\( x^2 + 2x + 2 = 0 \)</p>
+    <p>\( x = \frac{-2 \pm \sqrt{4 - 8}}{2} = \frac{-2 \pm \sqrt{-4}}{2} = -1 \pm i \)</p>
+
+    <h3>✅ Try These</h3>
+    <ol>
+      <li>\( x^2 - 4x + 3 = 0 \) → <strong>Answer:</strong> \( x = 3, 1 \)</li>
+      <li>\( x^2 + 2x - 8 = 0 \) → <strong>Answer:</strong> \( x = 2, -4 \)</li>
+      <li>\( x^2 + 1 = 0 \) → <strong>Answer:</strong> \( x = \pm i \)</li>
+      <li>\( 3x^2 + x - 2 = 0 \) → <strong>Answer:</strong> \( x = \frac{2}{3}, -1 \)</li>
+    </ol>
+
+    <button class="close-btn" onclick="closeLevel('level4')">Close</button>
+  </div>
+</div>
+
+  <a href="index.html" class="back-btn">⬅ Back to Tiers</a>
+</body>
+</html>

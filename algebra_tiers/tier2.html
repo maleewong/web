@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Tier 2: Inequalities & Absolute Values</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fffdf5;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      color: #2d3436;
+    }
+    .level {
+      background: #ffffff;
+      margin: 1rem auto;
+      max-width: 650px;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+    .level h2 {
+      color: #0984e3;
+      margin-top: 0;
+    }
+    .start-btn, .close-btn {
+      background-color: #00b894;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .close-btn {
+      background-color: #d63031;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      background-color: #636e72;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .content-box {
+      background-color: #f1f8ff;
+      border-left: 5px solid #74b9ff;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 6px;
+    }
+    .content-box p {
+      margin: 0.5rem 0;
+    }
+  </style>
+  <script>
+    function toggleLevel(id) {
+      const boxes = document.querySelectorAll('.content-box');
+      boxes.forEach(box => box.style.display = 'none');
+      document.getElementById(id).style.display = 'block';
+    }
+    function closeLevel(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+  </script>
+</head>
+<body>
+  <h1>Tier 2: Inequalities & Absolute Values</h1>
+
+  <div class="level">
+    <h2>Level 2.1 – Solving Inequalities</h2>
+    <p>Solve and graph simple inequalities like <code>x + 3 > 7</code></p>
+    <button class="start-btn" onclick="toggleLevel('level1')">Start</button>
+    <div id="level1" class="content-box" style="display: none;">
+      <h3>🧠 What Are Inequalities?</h3>
+      <p>Inequalities compare two expressions using symbols like: <code>&lt;</code>, <code>&gt;</code>, <code>&le;</code>, <code>&ge;</code></p>
+      <p>To solve, treat it like an equation, but remember:</p>
+      <ul>
+        <li>If you multiply or divide by a negative number, flip the inequality sign!</li>
+      </ul>
+      <h3>✏️ Examples</h3>
+      <ul>
+        <li><code>x + 5 &lt; 10</code> → Subtract 5 → <code>x &lt; 5</code></li>
+        <li><code>-2x &gt; 6</code> → Divide by -2 and flip → <code>x &lt; -3</code></li>
+      </ul>
+      <button class="close-btn" onclick="closeLevel('level1')">Close</button>
+    </div>
+  </div>
+
+<div class="level">
+  <h2>Level 2.2 – Compound Inequalities</h2>
+  <p>Understand and solve double inequalities like <code>3 &lt; x + 1 &le; 7</code></p>
+  <button class="start-btn" onclick="toggleLevel('level2')">Start</button>
+  <div id="level2" class="content-box" style="display: none;">
+    <h3>🧠 What Are Compound Inequalities?</h3>
+    <p>Compound inequalities contain two inequality statements joined by <strong>AND</strong> or <strong>OR</strong>.</p>
+
+    <h3>✅ AND Example</h3>
+    <p><code>3 &lt; x + 1 &le; 7</code></p>
+    <p>Step 1: Subtract 1 across all parts → <code>2 &lt; x &le; 6</code></p>
+    <p>Solution: x is greater than 2 and less than or equal to 6</p>
+
+    <h3>✅ OR Example</h3>
+    <p><code>x &lt; -2 OR x &gt; 4</code></p>
+    <p>This means x is either less than -2 or greater than 4.</p>
+
+    <h3>✅ Try These</h3>
+    <ol>
+      <li><code>-2 &lt; x - 3 &lt; 4</code> → <strong>Answer:</strong> <code>1 &lt; x &lt; 7</code></li>
+      <li><code>x &le; -1 OR x &gt; 5</code> → <strong>Answer:</strong> all values ≤ -1 or &gt; 5</li>
+    </ol>
+
+    <button class="close-btn" onclick="closeLevel('level2')">Close</button>
+  </div>
+</div>
+
+<div class="level">
+  <h2>Level 2.3 – Absolute Value Basics</h2>
+  <p>Learn how absolute value represents distance from zero. Example: <code>|-5| = 5</code></p>
+  <button class="start-btn" onclick="toggleLevel('level3')">Start</button>
+  <div id="level3" class="content-box" style="display: none;">
+    <h3>🧠 What Is Absolute Value?</h3>
+    <p>The absolute value of a number is its distance from 0 on the number line — it is always positive or zero.</p>
+
+    <h3>📏 Key Property</h3>
+    <p><code>|a| = a</code> if <code>a ≥ 0</code>; <code>|a| = -a</code> if <code>a &lt; 0</code></p>
+
+    <h3>✏️ Examples</h3>
+    <ul>
+      <li><code>|7| = 7</code></li>
+      <li><code>|-4| = 4</code></li>
+      <li><code>|0| = 0</code></li>
+    </ul>
+
+    <h3>✅ Try These</h3>
+    <ol>
+      <li><code>|-8|</code> → <strong>Answer:</strong> 8</li>
+      <li><code>|3 - 5|</code> → <strong>Answer:</strong> 2</li>
+      <li><code>|2 - 9|</code> → <strong>Answer:</strong> 7</li>
+    </ol>
+
+    <button class="close-btn" onclick="closeLevel('level3')">Close</button>
+  </div>
+</div>
+
+<div class="level">
+  <h2>Level 2.4 – Solving Absolute Value Equations</h2>
+  <p>Example: <code>|x - 2| = 7</code> → <code>x = 9</code> or <code>x = -5</code></p>
+  <button class="start-btn" onclick="toggleLevel('level4')">Start</button>
+  <div id="level4" class="content-box" style="display: none;">
+    <h3>🧠 What Is an Absolute Value Equation?</h3>
+    <p>It’s an equation where the unknown is inside an absolute value: <code>|expression| = number</code>.</p>
+    <p>These always give two solutions — one positive, one negative case.</p>
+
+    <h3>✏️ Rule:</h3>
+    <p>If <code>|A| = B</code>, then <code>A = B</code> or <code>A = -B</code></p>
+    <p><strong>Important:</strong> <code>B</code> must be <code>≥ 0</code>. If <code>B &lt; 0</code>, there is <strong>no solution</strong>.</p>
+
+    <h3>✔️ Example 1</h3>
+    <p><code>|x - 2| = 7</code></p>
+    <p>Case 1: <code>x - 2 = 7</code> → <code>x = 9</code><br>
+       Case 2: <code>x - 2 = -7</code> → <code>x = -5</code><br>
+       ✅ Solution: <code>x = 9</code> or <code>x = -5</code></p>
+
+    <h3>✔️ Example 2</h3>
+    <p><code>|3x + 1| = 10</code></p>
+    <p>Case 1: <code>3x + 1 = 10</code> → <code>x = 3</code><br>
+       Case 2: <code>3x + 1 = -10</code> → <code>x = -11/3</code><br>
+       ✅ Solution: <code>x = 3</code> or <code>x = -11/3</code></p>
+
+    <h3>✔️ Example 3</h3>
+    <p><code>|2x - 5| = -3</code></p>
+    <p>Absolute value cannot equal a negative number. ❌ No solution.</p>
+
+    <h3>✔️ Example 4</h3>
+    <p><code>|x + 4| = 0</code></p>
+    <p>Only one solution: <code>x + 4 = 0</code> → <code>x = -4</code></p>
+
+    <h3>✅ Try These</h3>
+    <ol>
+      <li><code>|x - 3| = 8</code> → <strong>Answer:</strong> <code>x = 11</code> or <code>x = -5</code></li>
+      <li><code>|2x + 1| = 5</code> → <strong>Answer:</strong> <code>x = 2</code> or <code>x = -3</code></li>
+      <li><code>|4x - 2| = -6</code> → <strong>Answer:</strong> No solution</li>
+      <li><code>|x| = 0</code> → <strong>Answer:</strong> <code>x = 0</code></li>
+    </ol>
+
+    <button class="close-btn" onclick="closeLevel('level4')">Close</button>
+  </div>
+</div>
+
+<div class="level">
+  <h2>Level 2.5 – Solving Absolute Value Inequalities</h2>
+  <p>Solve and graph inequalities like <code>|x - 3| &lt; 5</code></p>
+  <button class="start-btn" onclick="toggleLevel('level5')">Start</button>
+  <div id="level5" class="content-box" style="display: none;">
+    <h3>🧠 Absolute Value Inequalities</h3>
+    <p>These describe a range of values based on distance from zero or a number.</p>
+
+    <h3>📘 Two Key Rules:</h3>
+    <ul>
+      <li><strong><code>|A| &lt; B</code></strong> → <code>-B &lt; A &lt; B</code> (AND situation)</li>
+      <li><strong><code>|A| &gt; B</code></strong> → <code>A &lt; -B</code> OR <code>A &gt; B</code> (OR situation)</li>
+    </ul>
+    <p><strong>Note:</strong> The value of <code>B</code> must be non-negative. If <code>B &lt; 0</code>, there is no solution for &lt;, and all real numbers for &gt;.</p>
+
+    <h3>✏️ Example 1</h3>
+    <p><code>|x - 3| &lt; 5</code> → <code>-5 &lt; x - 3 &lt; 5</code> → Add 3 → <code>-2 &lt; x &lt; 8</code></p>
+
+    <h3>✏️ Example 2</h3>
+    <p><code>|2x + 1| &ge; 7</code> → <code>2x + 1 &le; -7</code> OR <code>2x + 1 &ge; 7</code><br>
+       Solve both → <code>x &le; -4</code> OR <code>x &ge; 3</code></p>
+
+    <h3>✏️ Example 3</h3>
+    <p><code>|x| &gt; -2</code> → Always true, since absolute values are always ≥ 0 → Solution: all real numbers</p>
+
+    <h3>✏️ Example 4</h3>
+    <p><code>|x + 2| &lt; 0</code> → No solution (absolute values cannot be negative)</p>
+
+    <h3>✅ Try These</h3>
+    <ol>
+      <li><code>|x - 4| &lt; 6</code> → <strong>Answer:</strong> <code>-2 &lt; x &lt; 10</code></li>
+      <li><code>|x + 5| &ge; 3</code> → <strong>Answer:</strong> <code>x &le; -8</code> OR <code>x &ge; -2</code></li>
+      <li><code>|2x - 1| &gt; -3</code> → <strong>Answer:</strong> all real numbers</li>
+      <li><code>|x - 7| &lt; 0</code> → <strong>Answer:</strong> no solution</li>
+    </ol>
+
+    <button class="close-btn" onclick="closeLevel('level5')">Close</button>
+  </div>
+</div>
+
+  <a href="index.html" class="back-btn">⬅ Back to Tiers</a>
+</body>
+</html>

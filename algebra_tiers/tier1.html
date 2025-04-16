@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tier 1: Expressions & Linear Equations</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f0f8ff;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      color: #2c3e50;
+    }
+    .level {
+      background: white;
+      margin: 1rem auto;
+      max-width: 600px;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+      text-align: left;
+    }
+    .level h2 {
+      margin-top: 0;
+      color: #2980b9;
+    }
+    .start-btn, .close-btn {
+      background-color: #27ae60;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      margin-top: 1rem;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: bold;
+    }
+    .close-btn {
+      background-color: #e74c3c;
+    }
+    .back-btn {
+      display: inline-block;
+      margin-top: 2rem;
+      background-color: #95a5a6;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+    }
+    .content-box {
+      background-color: #ecf9ff;
+      border-left: 5px solid #3498db;
+      padding: 1rem;
+      margin-top: 1rem;
+      border-radius: 6px;
+    }
+    .content-box p {
+      margin: 0.5rem 0;
+    }
+  </style>
+  <script>
+    function toggleLevel(id) {
+      const boxes = document.querySelectorAll('.content-box');
+      boxes.forEach(box => box.style.display = 'none');
+      const levelBox = document.getElementById(id);
+      levelBox.style.display = 'block';
+    }
+    function closeLevel(id) {
+      document.getElementById(id).style.display = 'none';
+    }
+  </script>
+</head>
+<body>
+  <h1>Tier 1: Expressions & Linear Equations</h1>
+
+  <div class="level">
+    <h2>Level 1.1 – Like Terms</h2>
+    <p>Combine like terms to simplify algebraic expressions.</p>
+    <button class="start-btn" onclick="toggleLevel('level1')">Start</button>
+    <div id="level1" class="content-box" style="display: none;">
+      <h3>🧠 What Are Like Terms?</h3>
+      <p>Like terms are terms that have the same variables raised to the same power. For example:</p>
+      <ul>
+        <li><code>3x</code> and <code>2x</code> are like terms</li>
+        <li><code>5xy</code> and <code>-2xy</code> are like terms</li>
+        <li><code>3x</code> and <code>3x<sup>2</sup></code> are <strong>not</strong> like terms</li>
+      </ul>
+      <h3>✏️ Example Problem</h3>
+      <p>Simplify the expression: <code>3x + 5x - 2x</code></p>
+      <p><strong>Solution:</strong> Combine all the <code>x</code> terms: <code>3x + 5x - 2x = 6x</code></p>
+      <h3>✅ Try It Yourself</h3>
+      <p>What is <code>4x + 2y - x + 3y</code> simplified?</p>
+      <p>Answer: Group x terms and y terms → <code>4x - x = 3x</code>, <code>2y + 3y = 5y</code><br><strong>Final Answer: 3x + 5y</strong></p>
+      <button class="close-btn" onclick="closeLevel('level1')">Close</button>
+    </div>
+  </div>
+
+  <div class="level">
+    <h2>Level 1.2 – Distributive Property</h2>
+    <p>Apply the distributive law: <code>a(b + c) = ab + ac</code>.</p>
+    <button class="start-btn" onclick="toggleLevel('level2')">Start</button>
+    <div id="level2" class="content-box" style="display: none;">
+      <h3>🧠 What Is the Distributive Property?</h3>
+      <p>The distributive property allows you to multiply a value across terms inside parentheses:</p>
+      <p><strong>Rule:</strong> <code>a(b + c) = ab + ac</code></p>
+
+      <h3>✏️ Examples</h3>
+      <ul>
+        <li><code>3(x + 4) = 3x + 12</code></li>
+        <li><code>-2(x - 5) = -2x + 10</code></li>
+        <li><code>4(2x + 3) = 8x + 12</code></li>
+        <li><code>-5(3a - 2b) = -15a + 10b</code></li>
+      </ul>
+
+      <h3>✅ Try It Yourself</h3>
+      <p>Simplify the following:</p>
+      <ol>
+        <li><code>2(x + 6)</code> → <strong>Answer:</strong> <code>2x + 12</code></li>
+        <li><code>-3(y - 4)</code> → <strong>Answer:</strong> <code>-3y + 12</code></li>
+        <li><code>6(2m + 5)</code> → <strong>Answer:</strong> <code>12m + 30</code></li>
+      </ol>
+
+      <button class="close-btn" onclick="closeLevel('level2')">Close</button>
+    </div>
+  </div>
+
+<div class="level">
+  <h2>Level 1.3 – One-Step Equations</h2>
+  <p>Solve equations in one operation. Example: <code>x - 4 = 6</code> → <code>x = 10</code></p>
+  <button class="start-btn" onclick="toggleLevel('level3')">Start</button>
+  <div id="level3" class="content-box" style="display: none;">
+    
+    <h3>🧠 What Are One-Step Equations?</h3>
+    <p>A one-step equation can be solved with just one inverse operation like addition, subtraction, multiplication, or division.</p>
+
+    <h3>➕ Solving by Addition</h3>
+    <p><strong>Example:</strong> <code>x - 4 = 6</code><br> Add 4 to both sides → <code>x = 10</code></p>
+
+    <h3>➖ Solving by Subtraction</h3>
+    <p><strong>Example:</strong> <code>x + 7 = 12</code><br> Subtract 7 from both sides → <code>x = 5</code></p>
+
+    <h3>✖️ Solving by Multiplication</h3>
+    <p><strong>Example:</strong> <code>x / 3 = 9</code><br> Multiply both sides by 3 → <code>x = 27</code></p>
+
+    <h3>➗ Solving by Division</h3>
+    <p><strong>Example:</strong> <code>5x = 20</code><br> Divide both sides by 5 → <code>x = 4</code></p>
+
+    <h3>✅ Try These</h3>
+    <ol>
+      <li><code>x + 8 = 15</code> → <strong>Answer:</strong> <code>x = 7</code></li>
+      <li><code>x - 6 = 11</code> → <strong>Answer:</strong> <code>x = 17</code></li>
+      <li><code>x / 4 = 5</code> → <strong>Answer:</strong> <code>x = 20</code></li>
+      <li><code>7x = 35</code> → <strong>Answer:</strong> <code>x = 5</code></li>
+    </ol>
+
+    <button class="close-btn" onclick="closeLevel('level3')">Close</button>
+  </div>
+</div>
+
+<div class="level">
+  <h2>Level 1.4 – Two-Step Equations</h2>
+  <p>Solve using two operations. Example: <code>2x + 3 = 11</code> → <code>x = 4</code></p>
+  <button class="start-btn" onclick="toggleLevel('level4')">Start</button>
+  <div id="level4" class="content-box" style="display: none;">
+
+    <h3>🧠 What Are Two-Step Equations?</h3>
+    <p>A two-step equation requires you to perform two inverse operations to isolate the variable.</p>
+    <p>General form: <code>ax + b = c</code></p>
+
+    <h3>🔧 Steps to Solve</h3>
+    <ol>
+      <li>Undo addition or subtraction</li>
+      <li>Then undo multiplication or division</li>
+    </ol>
+
+    <h3>✏️ Example 1</h3>
+    <p><code>2x + 3 = 11</code></p>
+    <p>Step 1: Subtract 3 → <code>2x = 8</code><br>Step 2: Divide by 2 → <code>x = 4</code></p>
+
+    <h3>✏️ Example 2</h3>
+    <p><code>-3x - 5 = 10</code></p>
+    <p>Step 1: Add 5 → <code>-3x = 15</code><br>Step 2: Divide by -3 → <code>x = -5</code></p>
+
+    <h3>✅ Try These</h3>
+    <ol>
+      <li><code>4x - 7 = 9</code> → <strong>Answer:</strong> <code>x = 4</code></li>
+      <li><code>-5x + 2 = -13</code> → <strong>Answer:</strong> <code>x = 3</code></li>
+      <li><code>6x + 12 = 0</code> → <strong>Answer:</strong> <code>x = -2</code></li>
+    </ol>
+
+    <button class="close-btn" onclick="closeLevel('level4')">Close</button>
+  </div>
+</div>
+
+
+<div class="level">
+  <h2>Level 1.5 – Variables on Both Sides</h2>
+  <p>Move variables to one side and solve. Example: <code>3x + 2 = x + 6</code> → <code>x = 2</code></p>
+  <button class="start-btn" onclick="toggleLevel('level5')">Start</button>
+  <div id="level5" class="content-box" style="display: none;">
+
+    <h3>🧠 What to Do When Variables Are on Both Sides?</h3>
+    <p>Your goal is to collect all variable terms on one side of the equation and constants on the other.</p>
+
+    <h3>🔧 Strategy</h3>
+    <ol>
+      <li>Subtract or add the smaller variable term to move variables to one side</li>
+      <li>Then solve the resulting one- or two-step equation</li>
+    </ol>
+
+    <h3>✏️ Example 1</h3>
+    <p><code>3x + 2 = x + 6</code></p>
+    <p>Step 1: Subtract <code>x</code> from both sides → <code>2x + 2 = 6</code><br>Step 2: Subtract 2 → <code>2x = 4</code><br>Step 3: Divide by 2 → <code>x = 2</code></p>
+
+    <h3>✏️ Example 2</h3>
+    <p><code>5x - 7 = 3x + 1</code></p>
+    <p>Step 1: Subtract <code>3x</code> → <code>2x - 7 = 1</code><br>Step 2: Add 7 → <code>2x = 8</code><br>Step 3: Divide → <code>x = 4</code></p>
+
+    <h3>✅ Try These</h3>
+    <ol>
+      <li><code>4x + 3 = 2x + 9</code> → <strong>Answer:</strong> <code>x = 3</code></li>
+      <li><code>6x - 5 = 3x + 1</code> → <strong>Answer:</strong> <code>x = 2</code></li>
+      <li><code>7x + 4 = 5x + 12</code> → <strong>Answer:</strong> <code>x = 4</code></li>
+    </ol>
+
+    <button class="close-btn" onclick="closeLevel('level5')">Close</button>
+  </div>
+</div>
+
+
+<div class="level">
+  <h2>Level 1.6 – Fractions in Equations</h2>
+  <p>Clear fractions and solve. Example: <code>(1/2)x = 3</code> → <code>x = 6</code></p>
+  <button class="start-btn" onclick="toggleLevel('level6')">Start</button>
+  <div id="level6" class="content-box" style="display: none;">
+
+    <h3>🧠 Why Are Fractions Tricky?</h3>
+    <p>Fractions can make equations feel harder — but we can eliminate them by multiplying both sides by a common denominator.</p>
+
+    <h3>🔧 Strategy</h3>
+    <ol>
+      <li>Find the denominator(s)</li>
+      <li>Multiply both sides of the equation by that denominator</li>
+      <li>Solve the resulting simpler equation</li>
+    </ol>
+
+    <h3>✏️ Example 1</h3>
+    <p><code>(1/2)x = 3</code></p>
+    <p>Multiply both sides by 2 → <code>x = 6</code></p>
+
+    <h3>✏️ Example 2</h3>
+    <p><code>x/4 + 2 = 5</code></p>
+    <p>Step 1: Subtract 2 → <code>x/4 = 3</code><br>Step 2: Multiply both sides by 4 → <code>x = 12</code></p>
+
+    <h3>✏️ Example 3</h3>
+    <p><code>(3/5)x - 1 = 2</code></p>
+    <p>Step 1: Add 1 → <code>(3/5)x = 3</code><br>Step 2: Multiply both sides by 5 → <code>3x = 15</code><br>Step 3: Divide by 3 → <code>x = 5</code></p>
+
+    <h3>✅ Try These</h3>
+    <ol>
+      <li><code>x/3 = 7</code> → <strong>Answer:</strong> <code>x = 21</code></li>
+      <li><code>(2/3)x = 10</code> → <strong>Answer:</strong> <code>x = 15</code></li>
+      <li><code>x/6 - 1 = 2</code> → <strong>Answer:</strong> <code>x = 18</code></li>
+    </ol>
+
+    <button class="close-btn" onclick="closeLevel('level6')">Close</button>
+  </div>
+</div>
+
+
+  <a href="index.html" class="back-btn">⬅ Back to Tiers</a>
+</body>
+</html>
