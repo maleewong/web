@@ -1,5 +1,5 @@
-/* Font: Quicksand for clean mobile readability */
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@500;700&display=swap');
+/* Google Font Import */
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;700&display=swap');
 
 body {
   font-family: 'Quicksand', sans-serif;
@@ -10,30 +10,35 @@ body {
 }
 
 h1 {
-  color: #2c3e50;
   font-size: 2.2rem;
-  margin-bottom: 10px;
+  margin: 20px 0 10px;
+  color: #2c3e50;
+}
+
+p {
+  font-size: 1.1rem;
+  margin-bottom: 15px;
 }
 
 .game-container {
-  margin: 20px auto;
+  margin: 0 auto;
   max-width: 700px;
   padding: 20px;
   border-radius: 20px;
-  background-color: #ffffffdd;
-  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  background-color: #ffffffee;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
 
 #start-button {
-  margin-top: 15px;
-  padding: 12px 24px;
   font-size: 20px;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 10px;
   background-color: #f39c12;
   color: white;
-  border: none;
-  border-radius: 12px;
   cursor: pointer;
-  transition: all 0.3s ease;
+  margin-bottom: 15px;
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 #start-button:hover {
@@ -45,14 +50,14 @@ h1 {
 #score-board,
 #mistakes-board {
   font-size: 18px;
-  margin-top: 10px;
+  margin: 8px 0;
 }
 
 #game-board {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 12px;
-  margin: 20px 0;
+  gap: 14px;
+  margin: 20px auto;
   padding: 0 10px;
 }
 
@@ -72,26 +77,35 @@ h1 {
   transform: scale(1.05);
 }
 
+.card.flipped {
+  background-color: #ffeaa7;
+}
+
 .card.matched {
   background-color: #9b59b6;
   color: white;
   font-weight: bold;
-  border: 2px solid #8e44ad;
+  border-color: #8e44ad;
 }
 
-/* Mobile Optimization */
+/* 📱 Mobile Optimization */
 @media screen and (max-width: 600px) {
   h1 {
     font-size: 1.8rem;
   }
 
+  p {
+    font-size: 1rem;
+  }
+
   #start-button {
-    font-size: 1.1rem;
+    font-size: 1rem;
     padding: 12px 20px;
   }
 
   #game-board {
     grid-template-columns: repeat(2, 1fr);
+    padding: 0 15px;
   }
 
   .card {
@@ -99,7 +113,9 @@ h1 {
     padding: 16px;
   }
 
-  #score-board, #mistakes-board, #timer {
+  #score-board,
+  #mistakes-board,
+  #timer {
     font-size: 16px;
   }
 }
