@@ -1,0 +1,78 @@
+body {
+  font-family: 'Comic Sans MS', cursive, sans-serif;
+  text-align: center;
+  background: linear-gradient(to bottom right, #ffe29f, #ffa99f);
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  color: #2c3e50;
+  text-shadow: 1px 1px #fff;
+}
+
+.game-container {
+  margin: 20px auto;
+  max-width: 700px;
+  padding: 20px;
+  border-radius: 20px;
+  background-color: #ffffffcc;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+#start-button {
+  margin-top: 15px;
+  padding: 12px 24px;
+  font-size: 20px;
+  background-color: #f39c12;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+#start-button:hover {
+  background-color: #e67e22;
+}
+
+#timer, #score-board, #mistakes-board {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+#game-board {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.card {
+  background-color: #fff;
+  border: 2px solid #ccc;
+  padding: 20px;
+  font-size: 18px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+  user-select: none;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+.card.correct {
+  background-color: #2ecc71;
+  color: #fff;
+  border-color: #27ae60;
+}
+
+.card.matched {
+  background-color: #9b59b6;
+  color: white;
+  font-weight: bold;
+  border: 2px solid #8e44ad;
+}
