@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Courses - Montri Maleewong</title>
   <style>
     body {
@@ -63,17 +63,31 @@
       border: 1px solid #f8bbd0;
     }
     .btn {
-      display: inline-block;
+      display: block;
       background-color: #0073e6;
       color: white;
       padding: 0.5rem 1rem;
       text-decoration: none;
-      border-radius: 5px;
-      margin-top: 10px;
-      margin-right: 10px;
+      border-radius: 8px;
+      margin: 10px auto;
+      max-width: 250px;
+      text-align: center;
+      font-size: 1rem;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
     }
     .btn:hover {
-      background-color: #005bb5;
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .btn.joy {
+      background: linear-gradient(to right, #ff9a9e, #fad0c4);
+      color: #333;
+      font-weight: bold;
+    }
+    .btn.quiz {
+      background: linear-gradient(to right, #43cea2, #185a9d);
+      font-weight: bold;
+      color: #fff;
     }
   </style>
 </head>
@@ -91,29 +105,28 @@
 
   <div class="container">
 
+    <div class="course-box algebra">
+      <h2>Simple Algebra Skills</h2>
+      <p>This section provides very basic algebra skills for high school students.</p>
+      <a href="algebra_tiers/index.html" class="btn">📘 Explore Very Simple Algebra 1–6</a>
+      <a href="game_alg_simple/index.html" class="btn joy">🎮 Play Easy Match Game</a>
+    </div>
+
     <div class="course-box calculus">
       <h2>Calculus</h2>
-      <p>This section covers many topics in calculus, including differentiation and integration for functions of several variables, and quadratic surfaces.</p>
-      <a href="https://montri.pythonanywhere.com" class="btn" target="_blank">Calculus Quiz</a>
+      <p>This course covers many topics in calculus, including differentiation and integration for functions of several variables and quadratic surfaces.</p>
       <a href="quadratic.html" class="btn">Quadratic Surface</a>
       <a href="helix.html" class="btn">Circular Helix</a>
       <a href="helix_spiral.html" class="btn">Spiral Helix</a>
+      <a href="https://montri.pythonanywhere.com" class="btn quiz">🧠 Calculus Quiz</a>
     </div>
 
     <div class="course-box numerical-analysis">
       <h2>Numerical Analysis</h2>
-      <p>This section covers basic numerical methods for solving mathematical problems. Just try a simple model.</p>
+      <p>This course covers a wide range of numerical methods for solving mathematical problems. Just try simple model.</p>
       <a href="sir_model_explaination.html" class="btn">SIR Model Explanation</a>
       <a href="sir_model_interactive.html" class="btn">SIR Model Interactive</a>
     </div>
-
-	<div class="course-box algebra">
-		<h2>Simple Algebra Skills</h2>
-		<p>This section provides very basic algebra skills for high school students.</p>
-		<a href="algebra_tiers/index.html" class="btn">Explore Algebra Tiers 1–6</a>
-		<a href="game_alg_simple/index.html" class="btn">Play Algebra Match Game</a>
-	</div>
-
 
   </div>
 
