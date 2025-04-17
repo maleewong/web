@@ -29,6 +29,7 @@
       cursor: grab;
       transition: transform 0.2s ease;
       display: inline-block;
+      user-select: none;
     }
     .tile:hover {
       transform: scale(1.05);
@@ -96,7 +97,22 @@
       ['5', '+', '4', '^', '2', '=', '21'],
       ['10', '-', '3', '*', '2', '=', '4'],
       ['3', '*', '2', '+', '5', '=', '11'],
-      ['8', '-', '2', '^', '2', '=', '4']
+      ['8', '-', '2', '^', '2', '=', '4'],
+      ['3', '+', '5', '*', '2', '=', '13'],
+      ['9', '-', '3', '*', '2', '=', '3'],
+      ['1', '+', '2', '+', '3', '=', '6'],
+      ['10', '/', '2', '+', '3', '=', '8'],
+      ['2', '*', '5', '-', '4', '=', '6'],
+      ['7', '+', '2', '^', '2', '=', '11'],
+      ['12', '-', '4', '/', '2', '=', '10'],
+      ['2', '*', '2', '^', '2', '=', '8'],
+      ['1', '+', '3', '*', '3', '=', '10'],
+      ['9', '+', '6', '-', '4', '=', '11'],
+      ['3', '^', '2', '+', '1', '=', '10'],
+      ['5', '^', '2', '-', '1', '=', '24'],
+      ['7', '*', '2', '-', '5', '=', '9'],
+      ['8', '/', '4', '+', '6', '=', '8'],
+      ['3', '+', '2', '^', '2', '=', '7']
     ];
 
     let correct = [];
@@ -115,8 +131,6 @@
     function loadPuzzle() {
       const randomIndex = Math.floor(Math.random() * questionBank.length);
       correct = questionBank[randomIndex];
-
-      // Fix 45% of tiles
       fixedIndices = new Set();
       const countToFix = Math.max(1, Math.floor(correct.length * 0.45));
       while (fixedIndices.size < countToFix) {
@@ -128,13 +142,14 @@
       const board = document.getElementById('puzzle-board');
       board.innerHTML = '';
       const displayTiles = correct.map((val, idx) => ({ value: val, idx }));
-
       const shuffled = shuffle(displayTiles.filter(t => !fixedIndices.has(t.idx)));
-
       let pointer = 0;
+
       for (let i = 0; i < correct.length; i++) {
         const tile = document.createElement('div');
         tile.className = 'tile';
+        tile.dataset.index = i;
+
         if (fixedIndices.has(i)) {
           tile.textContent = correct[i];
           tile.style.backgroundColor = '#c2f0c2';
@@ -147,6 +162,9 @@
           tile.addEventListener('dragstart', dragStart);
           tile.addEventListener('dragover', e => e.preventDefault());
           tile.addEventListener('drop', dropTile);
+
+          tile.addEventListener('touchstart', touchStart, { passive: true });
+          tile.addEventListener('touchend', touchEnd);
         }
         board.appendChild(tile);
       }
@@ -163,6 +181,26 @@
       this.textContent = dragged.textContent;
       dragged.textContent = temp;
       dragged.classList.remove('dragging');
+    }
+
+    let touchSource = null;
+    function touchStart(e) {
+      touchSource = e.currentTarget;
+      touchSource.classList.add('dragging');
+    }
+
+    function touchEnd(e) {
+      const touchTarget = document.elementFromPoint(
+        e.changedTouches[0].clientX,
+        e.changedTouches[0].clientY
+      );
+      if (touchTarget && touchTarget.classList.contains('tile') && !touchTarget.classList.contains('dragging')) {
+        const temp = touchTarget.textContent;
+        touchTarget.textContent = touchSource.textContent;
+        touchSource.textContent = temp;
+      }
+      if (touchSource) touchSource.classList.remove('dragging');
+      touchSource = null;
     }
 
     function checkAnswer() {
@@ -221,4 +259,5 @@
   </script>
 </body>
 </html>
+
 
