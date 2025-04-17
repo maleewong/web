@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Number Puzzle</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fef6e4;
+      text-align: center;
+      padding: 2rem;
+      margin: 0;
+    }
+    h1 {
+      color: #e67e22;
+      font-size: 2rem;
+    }
+    .tile {
+      background-color: #e6f0ff;
+      border: none;
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+      padding: 10px 16px;
+      margin: 8px;
+      border-radius: 10px;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #003366;
+      cursor: grab;
+      transition: transform 0.2s ease;
+      display: inline-block;
+    }
+    .tile:hover {
+      transform: scale(1.05);
+    }
+    .tile.dragging {
+      opacity: 0.6;
+    }
+    #controls button {
+      padding: 12px 24px;
+      margin: 0.5rem;
+      font-size: 1rem;
+      border: none;
+      border-radius: 8px;
+      color: #fff;
+      background-color: #27ae60;
+      cursor: pointer;
+    }
+    #controls button:nth-child(2) {
+      background-color: #2980b9;
+    }
+    #timer {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #c0392b;
+      position: fixed;
+      bottom: 10px;
+      right: 10px;
+      background: #fff3e0;
+      padding: 6px 12px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      z-index: 1000;
+    }
+    #result {
+      margin-top: 1rem;
+      font-size: 1.3rem;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <h1>🧩 Number Puzzle</h1>
+  <div id="timer">⏱ Time Used: <span id="time">0</span>s</div>
+  <div id="puzzle-board"></div>
+  <div id="controls">
+    <button onclick="checkAnswer()">✅ Check</button>
+    <button onclick="resetGame()">🔄 Reset</button>
+  </div>
+  <div><button id="show-answer" style="display:none; margin-top:1rem; padding:10px 20px; background:#8e44ad; color:white; border:none; border-radius:8px; font-size:1rem; cursor:pointer;">👁 Show Answer</button></div>
+  <div id="result"></div>
+
+  <script>
+    const questionBank = [
+      ['2', '^', '4', '=', '3', '^', '2', '+', '7'],
+      ['5', '^', '2', '=', '3', '^', '2', '+', '16'],
+      ['4', '^', '2', '+', '9', '=', '5', '^', '2'],
+      ['3', '^', '2', '+', '4', '^', '2', '=', '25'],
+      ['6', '^', '2', '=', '8', '^', '2', '-', '28'],
+      ['2', '*', '3', '-', '1', '=', '5'],
+      ['4', '+', '2', '*', '3', '=', '10'],
+      ['9', '-', '2', '^', '2', '=', '5'],
+      ['3', '^', '2', '-', '1', '=', '8'],
+      ['2', '+', '3', '^', '2', '=', '11'],
+      ['6', '/', '2', '+', '1', '=', '4'],
+      ['5', '+', '4', '^', '2', '=', '21'],
+      ['10', '-', '3', '*', '2', '=', '4'],
+      ['3', '*', '2', '+', '5', '=', '11'],
+      ['8', '-', '2', '^', '2', '=', '4']
+    ];
+
+    let correct = [];
+    let timerId;
+    let timeUsed = 0;
+    let fixedIndices = new Set();
+
+    function shuffle(arr) {
+      for (let i = arr.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [arr[i], arr[j]] = [arr[j], arr[i]];
+      }
+      return arr;
+    }
+
+    function loadPuzzle() {
+      const randomIndex = Math.floor(Math.random() * questionBank.length);
+      correct = questionBank[randomIndex];
+
+      // Fix 45% of tiles
+      fixedIndices = new Set();
+      const countToFix = Math.max(1, Math.floor(correct.length * 0.45));
+      while (fixedIndices.size < countToFix) {
+        fixedIndices.add(Math.floor(Math.random() * correct.length));
+      }
+    }
+
+    function createTiles() {
+      const board = document.getElementById('puzzle-board');
+      board.innerHTML = '';
+      const displayTiles = correct.map((val, idx) => ({ value: val, idx }));
+
+      const shuffled = shuffle(displayTiles.filter(t => !fixedIndices.has(t.idx)));
+
+      let pointer = 0;
+      for (let i = 0; i < correct.length; i++) {
+        const tile = document.createElement('div');
+        tile.className = 'tile';
+        if (fixedIndices.has(i)) {
+          tile.textContent = correct[i];
+          tile.style.backgroundColor = '#c2f0c2';
+          tile.style.cursor = 'default';
+          tile.draggable = false;
+        } else {
+          tile.textContent = shuffled[pointer].value;
+          pointer++;
+          tile.draggable = true;
+          tile.addEventListener('dragstart', dragStart);
+          tile.addEventListener('dragover', e => e.preventDefault());
+          tile.addEventListener('drop', dropTile);
+        }
+        board.appendChild(tile);
+      }
+    }
+
+    function dragStart(e) {
+      e.dataTransfer.setData('text/plain', e.target.textContent);
+      e.target.classList.add('dragging');
+    }
+
+    function dropTile(e) {
+      const dragged = document.querySelector('.dragging');
+      const temp = this.textContent;
+      this.textContent = dragged.textContent;
+      dragged.textContent = temp;
+      dragged.classList.remove('dragging');
+    }
+
+    function checkAnswer() {
+      const tiles = Array.from(document.querySelectorAll('.tile')).map(t => t.textContent);
+      const result = document.getElementById('result');
+      clearInterval(timerId);
+      const correctAnswer = correct.join(' ');
+      document.getElementById('show-answer').style.display = 'inline-block';
+
+      const userExpr = tiles.join('').replace(/\^/g, '**');
+      const sides = userExpr.split('=');
+      let isCorrect = false;
+
+      if (sides.length === 2) {
+        try {
+          const left = eval(sides[0]);
+          const right = eval(sides[1]);
+          isCorrect = Math.abs(left - right) < 1e-6;
+        } catch (e) {
+          isCorrect = false;
+        }
+      }
+
+      if (isCorrect) {
+        result.textContent = `🎉 Correct! Time used: ${timeUsed} seconds.`;
+        result.style.color = 'green';
+      } else {
+        result.textContent = `❌ Try again! Time used: ${timeUsed} seconds.`;
+        result.style.color = 'red';
+      }
+
+      document.getElementById('show-answer').onclick = () => {
+        alert(`✔ Correct answer: ${correctAnswer}`);
+      };
+    }
+
+    function startTimer() {
+      clearInterval(timerId);
+      timeUsed = 0;
+      document.getElementById('time').textContent = timeUsed;
+      timerId = setInterval(() => {
+        timeUsed++;
+        document.getElementById('time').textContent = timeUsed;
+      }, 1000);
+    }
+
+    function resetGame() {
+      loadPuzzle();
+      createTiles();
+      startTimer();
+      document.getElementById('result').textContent = '';
+      document.getElementById('show-answer').style.display = 'none';
+    }
+
+    window.onload = resetGame;
+  </script>
+</body>
+</html>
+
