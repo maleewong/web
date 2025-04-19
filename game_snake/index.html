@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Snake Quiz Game</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <h1>🐍 Snake Quiz Game</h1>
+  <div id="quiz-panel">
+    <div id="score">Score: 0</div>
+    <div id="quiz-question">Waiting for quiz...</div>
+  </div>
+  <div id="game-container">
+    <div id="game-board"></div>
+  </div>
+  <div id="restart-container">
+    <button onclick="location.reload()">🔄 Restart</button>
+  </div>
+  <div id="mobile-controls">
+    <div class="btn-row">
+      <button onclick="setDirection('ArrowUp')">⬆️</button>
+    </div>
+    <div class="btn-row">
+      <button onclick="setDirection('ArrowLeft')">⬅️</button>
+      <button onclick="setDirection('ArrowDown')">⬇️</button>
+      <button onclick="setDirection('ArrowRight')">➡️</button>
+    </div>
+  </div>
+
+  <!-- Timer shown bottom right -->
+  <div id="timer">Time: 0s</div>
+
+  <script src="script.js"></script>
+</body>
+</html>
+
+
