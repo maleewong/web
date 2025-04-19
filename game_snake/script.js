@@ -12,7 +12,7 @@ let quizActive = false;
 let quizOptions = [];
 
 let secondsElapsed = 0;
-setInterval(() => {
+let timerInterval = setInterval(() => {
   secondsElapsed++;
   const timerDiv = document.getElementById("timer");
   if (timerDiv) {
@@ -105,6 +105,7 @@ function move() {
   ) {
     clearInterval(interval);
     clearInterval(quizInterval);
+    clearInterval(timerInterval); // stop the timer
     alert("Game Over! Final Score: " + score);
     return;
   }
@@ -145,30 +146,3 @@ function startGame() {
 }
 
 startGame();
-
-const quizBank = [
-  { question: "2x = 6", options: ["2", "3", "4", "5"], answer: "3" },
-  { question: "x + 4 = 7", options: ["2", "3", "4", "5"], answer: "3" },
-  { question: "x/2 = 5", options: ["2", "5", "10", "12"], answer: "10" },
-  { question: "3x = 9", options: ["1", "2", "3", "4"], answer: "3" },
-  { question: "x + 3 = 6", options: ["1", "2", "3", "4"], answer: "3" },
-  { question: "x = 2 + 3", options: ["2", "3", "4", "5"], answer: "5" },
-  { question: "5 = x - 2", options: ["6", "7", "3", "4"], answer: "7" },
-  { question: "10 = 2x", options: ["4", "5", "6", "7"], answer: "5" },
-  { question: "x - 5 = 0", options: ["5", "4", "3", "2"], answer: "5" },
-  { question: "7 + x = 10", options: ["2", "3", "4", "5"], answer: "3" },
-  { question: "x = 8 / 2", options: ["2", "3", "4", "5"], answer: "4" },
-  { question: "x + 1 = 3", options: ["2", "1", "3", "0"], answer: "2" },
-  { question: "4 = x + 1", options: ["1", "2", "3", "4"], answer: "3" },
-  { question: "x = 10 - 3", options: ["5", "6", "7", "8"], answer: "7" },
-  { question: "2 + x = 9", options: ["6", "7", "8", "9"], answer: "7" },
-  { question: "x - 4 = 2", options: ["5", "6", "7", "8"], answer: "6" },
-  { question: "12 = 3x", options: ["2", "4", "6", "8"], answer: "4" },
-  { question: "x / 3 = 4", options: ["10", "11", "12", "13"], answer: "12" },
-  { question: "6x = 18", options: ["2", "3", "4", "5"], answer: "3" },
-  { question: "5x = 25", options: ["4", "5", "6", "7"], answer: "5" }
-];
-
-
-
-
