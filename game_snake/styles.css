@@ -105,13 +105,14 @@ h1 {
 #mobile-controls .btn-row {
   display: flex;
   justify-content: center;
-  margin: 2px 0;
+  margin: 6px 0;        /* increased spacing */
+  gap: 12px;            /* space between arrow buttons */
 }
 
 #mobile-controls button {
-  font-size: 20px;
-  padding: 6px 14px;
-  margin: 2px;
+  font-size: 22px;
+  padding: 10px 18px;
+  margin: 4px;
   border-radius: 6px;
   background-color: #bae8e8;
   border: 2px solid #90dbf4;
@@ -140,8 +141,7 @@ h1 {
   }
 
   #mobile-controls button {
-    font-size: 18px;
-    padding: 6px 12px;
+    font-size: 20px;
+    padding: 8px 16px;
   }
 }
-
