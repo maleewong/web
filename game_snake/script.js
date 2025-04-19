@@ -1,3 +1,8 @@
+
+
+
+
+
 const board = document.getElementById("game-board");
 const scoreDisplay = document.getElementById("score");
 const boardSize = 18;
@@ -10,15 +15,6 @@ let quizInterval = null;
 let quizTimer = null;
 let quizActive = false;
 let quizOptions = [];
-
-let secondsElapsed = 0;
-setInterval(() => {
-  secondsElapsed++;
-  const timerDiv = document.getElementById("timer");
-  if (timerDiv) {
-    timerDiv.textContent = `Time: ${secondsElapsed}s`;
-  }
-}, 1000);
 
 function setDirection(key) {
   const dirMap = {
@@ -138,7 +134,7 @@ function move() {
 function startGame() {
   snake.forEach(i => cells[i].classList.add("snake"));
   spawnFood();
-  interval = setInterval(move, 200);
+  interval = setInterval(move, 300); // slowed down by 10%
   quizInterval = setInterval(() => {
     if (!quizActive) spawnQuiz();
   }, 30000);
@@ -168,7 +164,3 @@ const quizBank = [
   { question: "6x = 18", options: ["2", "3", "4", "5"], answer: "3" },
   { question: "5x = 25", options: ["4", "5", "6", "7"], answer: "5" }
 ];
-
-
-
-
