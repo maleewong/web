@@ -235,19 +235,17 @@ body {
   color: white;
   z-index: 999;
 }
-
-
 @media (max-width: 1024px) and (orientation: portrait) {
   .game-layout {
-    height: 100dvh; /* Use dynamic viewport height to prevent overflow on iOS Safari */
+    height: 100dvh;
     padding-bottom: 0;
   }
 
   #player-bottom {
-    margin-bottom: 10px;
+    margin-bottom: 0px; /* Further reduced */
   }
 
   #round-status {
-    bottom: 5px;
+    bottom: 2px; /* Pull up closer */
   }
 }
