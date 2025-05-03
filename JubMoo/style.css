@@ -236,3 +236,18 @@ body {
   z-index: 999;
 }
 
+
+@media (max-width: 1024px) and (orientation: portrait) {
+  .game-layout {
+    height: 100dvh; /* Use dynamic viewport height to prevent overflow on iOS Safari */
+    padding-bottom: 0;
+  }
+
+  #player-bottom {
+    margin-bottom: 10px;
+  }
+
+  #round-status {
+    bottom: 5px;
+  }
+}
