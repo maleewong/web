@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Jubmoo - iPad Edition</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="game-layout">
+    <div class="row top">
+      <div class="player" id="player-top"></div>
+    </div>
+    <div class="row middle">
+      <div class="player" id="player-left"></div>
+      <div class="center" id="center-pile"></div>
+      <div class="player" id="player-right"></div>
+    </div>
+    <div class="row bottom">
+      <div class="player" id="player-bottom"></div>
+    </div>
+  </div>
+
+  <!-- Control Panel -->
+  <div class="control-panel">
+    <button id="view-scores-btn">👁 ดูไพ่</button>
+    <button id="score-summary-btn">📊 คะแนน</button>
+  </div>
+
+  <!-- Score Panel -->
+  <div class="panel-container hidden" id="score-panel">
+    <div class="panel">
+      <button class="close-panel">❌</button>
+      <div id="score-root"></div>
+    </div>
+  </div>
+
+  <!-- Round Selector -->
+  <div id="round-select-wrapper">
+    <label for="round-select">เลือกจำนวนรอบ: </label>
+    <select id="round-select">
+      <option value="1">1</option>
+      <option value="2">2</option>
+      <option value="3">3</option>
+      <option value="4">4</option>
+      <option value="5">5</option>
+      <option value="6">6</option>
+      <option value="7">7</option>
+      <option value="8">8</option>
+      <option value="9">9</option>
+      <option value="10">10</option>
+    </select>
+  </div>
+
+  <!-- Start Button -->
+  <button id="start-btn">▶️ เริ่มเกม</button>
+  <span id="round-status" style="display:none;">รอบที่ 0/0</span>
+
+  <script src="app.js"></script>
+</body>
+</html>
