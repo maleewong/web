@@ -1,0 +1,85 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>PeerJS Room Chat</title>
+  <style>
+    body { font-family: Arial; padding: 20px; }
+    #log { border: 1px solid #aaa; height: 300px; overflow-y: auto; padding: 10px; margin-bottom: 10px; }
+    input[type=text] { width: 200px; }
+  </style>
+</head>
+<body>
+  <h1>PeerJS Room Chat</h1>
+  <label>Your ID:</label>
+  <input id="peerid" type="text" placeholder="Enter your ID">
+  <br><br>
+  <label>Room ID to join:</label>
+  <input id="room" type="text" placeholder="Enter room ID">
+  <button onclick="joinRoom()">Join Room</button>
+
+  <div id="log"></div>
+
+  <input id="message" type="text" placeholder="Type a message">
+  <button onclick="sendMessage()">Send</button>
+
+  <script src="https://unpkg.com/peerjs@1.4.7/dist/peerjs.min.js"></script>
+  <script>
+    let peer;
+    let connections = [];
+
+    function log(msg) {
+      const logEl = document.getElementById('log');
+      logEl.innerHTML += msg + '<br>';
+      logEl.scrollTop = logEl.scrollHeight;
+    }
+
+    function joinRoom() {
+      const myId = document.getElementById('peerid').value;
+      const targetId = document.getElementById('room').value;
+
+      peer = new Peer(myId, {
+        host: 'peerjs-server-xe61.onrender.com',
+        port: 10000,
+        path: '/',
+        secure: true
+      });
+
+      peer.on('open', () => {
+        log(`✅ Your ID: ${myId}`);
+        if (targetId && targetId !== myId) {
+          const conn = peer.connect(targetId);
+          setupConnection(conn);
+        }
+      });
+
+      peer.on('connection', conn => {
+        setupConnection(conn);
+      });
+    }
+
+    function setupConnection(conn) {
+      connections.push(conn);
+      log(`🔗 Connected to: ${conn.peer}`);
+
+      conn.on('data', data => {
+        log(`📨 ${conn.peer}: ${data}`);
+      });
+
+      conn.on('close', () => {
+        log(`❌ Connection with ${conn.peer} closed`);
+      });
+    }
+
+    function sendMessage() {
+      const msg = document.getElementById('message').value;
+      connections.forEach(conn => {
+        conn.send(msg);
+      });
+      log(`🟢 You: ${msg}`);
+      document.getElementById('message').value = '';
+    }
+  </script>
+</body>
+</html>
