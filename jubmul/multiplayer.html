@@ -1,0 +1,26 @@
+
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8">
+  <title>จับหมู - Multiplayer</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="peer.min.js"></script>
+</head>
+<body>
+  <div class="game-title">จับหมู Multiplayer (2–4 คน)</div>
+  <div id="peer-ui">
+    <label>จำนวนผู้เล่น: <input type="number" id="player-count" min="2" max="4" value="2" /></label><br>
+    <button onclick="createRoom()">🚪 สร้างห้อง (Host)</button>
+    <p id="my-id">Room ID: -</p>
+    <input id="peer-id-input" placeholder="กรอก Room ID เพื่อเข้าห้อง">
+    <button onclick="connectToPeer(document.getElementById('peer-id-input').value)">🔗 เข้าห้อง</button>
+  </div>
+  <div id="game-container"></div>
+  <script>
+    let playerName = "";
+  </script>
+  <script src="app.js"></script>
+  <script src="multiplayer.js"></script>
+</body>
+</html>

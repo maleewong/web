@@ -1,0 +1,251 @@
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #35654d;
+  font-family: Arial, sans-serif;
+  height: 100vh;
+  overflow: hidden;
+}
+
+.game-layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  justify-content: space-between;
+  padding: 10px;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.row.middle {
+  justify-content: space-between;
+  padding: 0 10vw;
+  margin: -30px 0;
+}
+
+.player {
+  display: flex;
+  justify-content: center;
+}
+
+#player-top,
+#player-bottom {
+  flex-direction: row;
+}
+
+#player-left,
+#player-right {
+  flex-direction: column;
+  margin-top: -20px;
+}
+
+#player-bottom {
+  margin-bottom: 40px;
+}
+
+/* ซ้อนแนวเดียว */
+#player-top .card,
+#player-bottom .card {
+  margin-left: -30px;
+}
+#player-top .card:first-child,
+#player-bottom .card:first-child {
+  margin-left: 0;
+}
+
+#player-left .card,
+#player-right .card {
+  margin-top: -65px;
+  transform: rotate(90deg);
+}
+#player-left .card:first-child,
+#player-right .card:first-child {
+  margin-top: 0;
+}
+
+/* ไพ่หลัก */
+.card {
+  width: 60px;
+  height: 90px;
+  border: 2px solid white;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* Panel ขนาดเล็ก + ไพ่ใหญ่ขึ้น */
+.panel {
+  background: white;
+  width: 80%;
+  max-width: 480px;
+  padding: 20px;
+  border-radius: 10px;
+  max-height: 90vh;
+  overflow-y: auto;
+  position: relative;
+  font-size: 14px;
+}
+.panel .card {
+  width: 42px;
+  height: 63px;
+  margin: 3px;
+  border: 1px solid #bbb;
+}
+.panel .zone {
+  margin-bottom: 12px;
+}
+.panel .zone h3 {
+  margin: 4px 0;
+}
+.panel em {
+  font-size: 0.85em;
+  color: #666;
+}
+
+/* ปุ่มปิด panel */
+.panel-container {
+  position: fixed;
+  top: 0; left: 0;
+  width: 100vw; height: 100vh;
+  background: rgba(0,0,0,0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+.panel-container.hidden {
+  display: none;
+}
+.close-panel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 18px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+/* กองกลาง */
+.center {
+  width: 120px;
+  height: 120px;
+  position: relative;
+}
+.center-card {
+  position: absolute;
+  width: 60px;
+  height: 90px;
+}
+.center-top { top: -100px; left: 0; }
+.center-bottom { top: 100px; left: 0; }
+.center-left { top: 0; left: -100px; }
+.center-right { top: 0; left: 100px; }
+
+/* ปุ่มควบคุม */
+.control-panel {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 1000;
+}
+.control-panel button {
+  font-size: 16px;
+  padding: 8px 14px;
+  background-color: #fff2c7;
+  border: 1px solid #444;
+  border-radius: 6px;
+  cursor: pointer;
+  box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.3);
+}
+.control-panel button:hover {
+  background-color: #ffe694;
+}
+
+/* ตารางคะแนน */
+.score-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 10px;
+}
+.score-table th, .score-table td {
+  border: 1px solid #999;
+  padding: 8px 12px;
+  text-align: center;
+}
+.score-table th {
+  background-color: #f3f3f3;
+}
+
+/* ปุ่มเริ่มเกม */
+#start-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  padding: 14px 24px;
+  font-size: 20px;
+  background-color: #fff2c7;
+  border: 2px solid #333;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 1000;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.4);
+}
+
+/* ตัวเลือกจำนวนรอบ */
+#round-select-wrapper {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff2c7;
+  padding: 10px 16px;
+  border: 2px solid #333;
+  border-radius: 10px;
+  font-size: 16px;
+  z-index: 1001;
+  box-shadow: 2px 2px 10px rgba(0,0,0,0.4);
+}
+#round-select {
+  font-size: 16px;
+  padding: 4px 8px;
+  margin-left: 8px;
+}
+
+/* สถานะรอบ */
+#round-status {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 14px;
+  color: white;
+  z-index: 999;
+}
+@media (max-width: 1024px) and (orientation: portrait) {
+  .game-layout {
+    height: 100dvh;
+    padding-bottom: 0;
+  }
+
+  #player-bottom {
+    margin-bottom: 0px; /* Further reduced */
+  }
+
+  #round-status {
+    bottom: 2px; /* Pull up closer */
+  }
+}
