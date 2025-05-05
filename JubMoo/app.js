@@ -14,6 +14,12 @@ let totalRounds = 1;
 let currentRound = 0;
 let roundScores = [];
 
+let gameState = {
+  qSpadesPlayed: false,
+  trickNumber: 0,
+  leadPlayer: null,
+  scores: { bottom: 0, left: 0, top: 0, right: 0 }
+};
 
 
 
@@ -204,6 +210,20 @@ if (currentRound < totalRounds) {
 
 function playCard(player, card) {
   const [rank, suit] = card.split('_of_');
+
+  // ✅ เช็คว่าลงผิดดอกหรือไม่ (บังคับตาม currentLeadSuit ถ้ามี)
+  if (
+    currentPlayerIndex !== 0 &&                   // ไม่ใช่คนเริ่ม
+    currentLeadSuit &&                            // มีดอกถูก lead
+    suit !== currentLeadSuit &&                   // ลงต่างดอก
+    players[player].some(c => c.includes(`_of_${currentLeadSuit}`)) // แต่ยังมีไพ่ตามดอกนั้นอยู่
+  ) {
+    console.error(`❌ ${player} ลงผิดดอก! มี ${currentLeadSuit} แต่ลง ${card}`);
+    alert(`❌ ${player.toUpperCase()} ลงผิดกติกา: มีไพ่ดอก ${currentLeadSuit} แต่ลง ${card}`);
+    return; // ❗ หยุดไม่ให้ลง
+  }
+
+  if (card === 'queen_of_spades') gameState.qSpadesPlayed = true;
   if (currentPlayerIndex === 0) currentLeadSuit = suit;
 
   const idx = players[player].indexOf(card);
@@ -213,11 +233,11 @@ function playCard(player, card) {
 
   const img = document.createElement('img');
   img.src = `assets/cards/${card}.png`;
+  img.classList.add('card', 'center-card', `center-${player}`);
   img.onerror = () => {
     img.src = 'assets/cards/back.png';
   };
 
-  img.classList.add('card', 'center-card', `center-${player}`);
   document.getElementById('center-pile').appendChild(img);
 
   centerCards.push({ player, card });
@@ -225,18 +245,231 @@ function playCard(player, card) {
   nextTurn();
 }
 
+
 function botPlay(player) {
   const hand = players[player];
-  let options = hand;
+  let playable = getPlayableCards(player, hand);
+  const analysis = analyzeHand(hand);
+  const isLead = currentPlayerIndex === 0;
+  const isLast = currentPlayerIndex === 3;
+  const isMiddle = currentPlayerIndex === 1 || currentPlayerIndex === 2;
+  const leading = isPlayerLeading(player);
 
-  if (currentLeadSuit) {
-    const filtered = hand.filter(c => c.includes(`_of_${currentLeadSuit}`));
-    if (filtered.length > 0) options = filtered;
+  let selectedCard = isLead
+    ? chooseBestLead(playable, analysis, leading)
+    : chooseBestFollow(playable, analysis, isLast, isMiddle, leading, player);
+
+  // ✅ แก้ตรงนี้ - fallback ถ้าไม่ได้ return
+  if (!selectedCard || !playable.includes(selectedCard)) {
+    console.warn(`⚠️ BOT ${player} ไม่สามารถเลือกไพ่ได้! fallback ใช้ไพ่แรก`);
+    selectedCard = playable[0];
   }
 
-  const card = options[Math.floor(Math.random() * options.length)];
-  playCard(player, card);
+  playCard(player, selectedCard);
 }
+
+
+
+function analyzeHand(hand) {
+  return {
+    hasQSpades: hand.includes('queen_of_spades'),
+    hasJDiamond: hand.includes('jack_of_diamonds'),
+    has10Clubs: hand.includes('10_of_clubs'),
+    hearts: hand.filter(c => c.includes('_of_hearts')),
+    highHearts: hand.filter(c => ['queen_of_hearts','king_of_hearts','ace_of_hearts'].includes(c)),
+    highSpades: hand.filter(c => ['king_of_spades','ace_of_spades'].includes(c)),
+    diamonds: hand.filter(c => c.includes('_of_diamonds')),
+    safeHand: hand.every(c => {
+      const [rank, suit] = c.split('_of_');
+      return !['queen','king','ace'].includes(rank) &&
+        !['queen_of_spades','jack_of_diamonds','10_of_clubs'].includes(c);
+    })
+  };
+}
+
+function getPlayableCards(player, hand) {
+  if (currentPlayerIndex === 0) return hand;
+  const hasLeadSuit = hand.some(card => card.includes(`_of_${currentLeadSuit}`));
+  return hasLeadSuit ? hand.filter(c => c.includes(`_of_${currentLeadSuit}`)) : hand;
+}
+
+function isPlayerLeading(player) {
+  const current = gameState?.scores?.[player] || 0;
+  const others = Object.entries(gameState?.scores || {}).filter(([k]) => k !== player).map(([, v]) => v);
+  return others.every(o => current >= o);
+}
+
+function chooseBestLead(playable, a, leading) {
+  const avoid = ['queen_of_spades','queen_of_hearts','king_of_hearts','ace_of_hearts'];
+  let safe = playable.filter(c => !avoid.includes(c));
+
+  // 🧠 A: หลีก K♠ / A♠ ถ้า Q♠ ยังไม่ออก และเราไม่มี Q♠
+  if (!a.hasQSpades && !gameState.qSpadesPlayed) {
+    const dangerousSpades = ['king_of_spades', 'ace_of_spades'];
+    const spadesInHand = playable.filter(c => c.includes('_of_spades'));
+    const lowSpades = spadesInHand.filter(c =>
+      !dangerousSpades.includes(c) && c !== 'queen_of_spades'
+    );
+    if (lowSpades.length > 0) {
+      safe = safe.filter(c => !dangerousSpades.includes(c));
+    }
+  }
+
+  // 🧠 B: หลีก J♦ ถ้า Q/K/A♦ ยังไม่ออก
+  const jDiamondControls = ['queen_of_diamonds', 'king_of_diamonds', 'ace_of_diamonds'];
+  const seenCards = centerCards.map(c => c.card).concat(...Object.values(collectedCards).flat());
+  const controlsStillHidden = jDiamondControls.filter(c => !seenCards.includes(c));
+  if (playable.includes('jack_of_diamonds') && controlsStillHidden.length > 0) {
+    safe = safe.filter(c => c !== 'jack_of_diamonds');
+  }
+
+  // 🧠 C: หลีก Q/K/A ♥ ถ้าไม่ได้ถือ ♥ ยาว (ไม่ช้วน)
+  if (a.hearts.length < 5) {
+    const dangerousHearts = ['queen_of_hearts','king_of_hearts','ace_of_hearts'];
+    safe = safe.filter(c => !dangerousHearts.includes(c));
+  }
+
+  if (safe.length > 0) {
+    return safe[Math.floor(Math.random() * safe.length)];
+  }
+
+  return playable[Math.floor(Math.random() * playable.length)];
+}
+
+
+
+function chooseBestFollow(playable, a, isLast, isMiddle, leading, player) {
+  const blockJ = ['queen_of_diamonds', 'king_of_diamonds', 'ace_of_diamonds'];
+  const hasBlocks = blockJ.some(c => a.diamonds.includes(c));
+
+  const centerSoFar = centerCards.map(c => c.card);
+  const centerRanks = centerSoFar.map(c => c.split('_of_')[0]);
+  const centerSuits = centerSoFar.map(c => c.split('_of_')[1]);
+
+  // 🧠 แผน 1: ถ้าคนก่อนลง J♦ และเรามีตัวคุม → ลงกินเลย
+  if (
+    currentLeadSuit === 'diamonds' &&
+    centerSoFar.includes('jack_of_diamonds')
+  ) {
+    const control = playable.find(c => blockJ.includes(c));
+    if (control) return control;
+  }
+
+  // 🧠 แผน 2: ถ้ามี J♦ และถือ Q/K/A♦ → ทิ้งตัวคุมก่อน
+  for (const controlCard of blockJ) {
+    if (a.hasJDiamond && a.diamonds.includes(controlCard) && playable.includes(controlCard)) {
+      return controlCard;
+    }
+  }
+
+  // 🧠 แผน 3: ถ้าคนก่อนหน้าออก Q/K/A♦ และเราไม่มี J♦ → อย่าทิ้งตัวคุมซ้ำ
+  if (
+    centerSoFar.some(c => blockJ.includes(c)) &&
+    !centerSoFar.includes('jack_of_diamonds') &&
+    !a.hasJDiamond
+  ) {
+    const avoid = playable.filter(c => blockJ.includes(c));
+    if (avoid.length > 0 && avoid.length < playable.length) {
+      playable = playable.filter(c => !blockJ.includes(c));
+    }
+  }
+
+  // 🧠 แผน 4: ถ้าเราถือ J♦ และไม่ใช่คนสุดท้าย → อย่าทิ้ง J ถ้ามีตัวอื่น
+  if (
+    a.hasJDiamond &&
+    !isLast &&
+    playable.includes('jack_of_diamonds') &&
+    playable.length > 1
+  ) {
+    playable = playable.filter(c => c !== 'jack_of_diamonds');
+  }
+
+  // 🧠 แผน 5: ถ้าเป็นคนสุดท้ายและถือ J♦ → พิจารณาลงเก็บเอง
+  if (
+    isLast &&
+    a.hasJDiamond &&
+    playable.includes('jack_of_diamonds')
+  ) {
+    const blockers = blockJ;
+    const othersMayHaveBlock = blockers.some(rank =>
+      Object.entries(players).some(([p, h]) =>
+        p !== player && h.includes(`${rank}_of_diamonds`)
+      )
+    );
+    if (!othersMayHaveBlock) return 'jack_of_diamonds';
+  }
+
+  // 🧠 แผน 6: ถ้าคนก่อนลง K♠ หรือ A♠ และเรามี Q♠ → ทิ้งให้เลย
+  if (
+    a.hasQSpades &&
+    playable.includes('queen_of_spades') &&
+    currentLeadSuit === 'spades' &&
+    centerRanks.some(r => ['king', 'ace'].includes(r))
+  ) {
+    return 'queen_of_spades';
+  }
+
+  // 🧠 แผน 7: หลีก Q♠ ถ้าคน lead ♠ และเรายังมีใบอื่นใน ♠
+  if (
+    currentLeadSuit === 'spades' &&
+    playable.includes('queen_of_spades') &&
+    playable.filter(c => c.includes('_of_spades')).length > 1
+  ) {
+    playable = playable.filter(c => c !== 'queen_of_spades');
+  }
+
+  // 🧠 แผน 8: ถ้า Q♠ ออกแล้ว → ♠ ปลอดภัย
+  if (gameState.qSpadesPlayed && currentLeadSuit === 'spades') {
+    const spades = playable.filter(c => c.includes('_of_spades'));
+    if (spades.length > 0) return spades[0];
+  }
+
+  // 🧠 แผน 9: หลีก A♠, K♠ ถ้า Q♠ ยังไม่ออก
+  if (!gameState.qSpadesPlayed) {
+    playable = playable.filter(c => !['king_of_spades','ace_of_spades'].includes(c));
+  }
+
+  // 🧠 แผน 10: มือปลอดภัย + มี 10♣ → ลองกินเอง
+  if (a.safeHand && a.has10Clubs && playable.includes('10_of_clubs')) {
+    return '10_of_clubs';
+  }
+
+  // 🧠 แผน 11: ถ้าคนอื่นถือ ♥ เยอะ → ปั่น
+  const othersHoldingRed = Object.entries(players).some(([p, h]) =>
+    p !== player && h.filter(c => c.includes('_of_hearts')).length >= 4
+  );
+  if (othersHoldingRed) {
+    const hearts = playable.filter(c => c.includes('_of_hearts'));
+    if (hearts.length > 0) return hearts[0];
+  }
+
+  // 🧠 แผน 12: ถ้าเรานำคะแนน → หลีกเสี่ยง
+  if (leading) {
+    const safe = playable.filter(c =>
+      !c.includes('_of_hearts') &&
+      c !== 'queen_of_spades' &&
+      c !== 'jack_of_diamonds'
+    );
+    if (safe.length > 0) return safe[Math.floor(Math.random() * safe.length)];
+  }
+
+  // 🧠 แผน 13: ถ้าลำดับกลาง → เลือกไพ่กลาง
+  if (isMiddle && playable.length >= 3) {
+    const sorted = playable.slice().sort(sortCards);
+    return sorted[Math.floor(sorted.length / 2)];
+  }
+
+  // 🧠 แผน 14: หลีก ♥ ถ้าเลือกได้
+  const nonHearts = playable.filter(c => !c.includes('_of_hearts'));
+  if (nonHearts.length > 0) {
+    return nonHearts[Math.floor(Math.random() * nonHearts.length)];
+  }
+
+  // 🧠 fallback: เลือกจาก playable ทั้งหมด
+  return playable[Math.floor(Math.random() * playable.length)];
+}
+
+
 
 function isCardPlayable(player, card) {
   if (player !== playingOrder[currentPlayerIndex]) return false;
@@ -455,3 +688,4 @@ function updateRoundStatus() {
 document.getElementById('score-summary-btn').addEventListener('click', () => {
   showFinalSummary();
 });
+
