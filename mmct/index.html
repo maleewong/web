@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Math Modeling Thailand</title>
+  <style>
+    :root {
+      --main-color: #003366;
+      --accent-color: #ffd700;
+      --bg-color: #f9f9f9;
+    }
+    body {
+      margin: 0;
+      font-family: 'Sarabun', sans-serif;
+      background-color: var(--bg-color);
+      line-height: 1.6;
+    }
+    header {
+      background: var(--main-color);
+      color: white;
+      padding: 1rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+    .lang-switch button {
+      margin: 0 0.25rem;
+      padding: 0.4rem 0.8rem;
+      font-weight: bold;
+      border: none;
+      background: var(--accent-color);
+      color: #000;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    nav {
+      background: #eee;
+      padding: 1rem;
+      text-align: center;
+    }
+    nav a {
+      margin: 0 10px;
+      color: var(--main-color);
+      text-decoration: none;
+      font-weight: bold;
+    }
+    section {
+      max-width: 900px;
+      margin: auto;
+      background: white;
+      padding: 2rem;
+      margin-bottom: 1rem;
+      border-radius: 10px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.05);
+    }
+    h2 {
+      color: var(--main-color);
+    }
+    footer {
+      background: var(--main-color);
+      color: white;
+      text-align: center;
+      padding: 1rem;
+      font-size: 0.9rem;
+    }
+    @media (max-width: 768px) {
+      header {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      nav {
+        display: flex;
+        flex-direction: column;
+      }
+      nav a {
+        margin: 5px 0;
+      }
+    }
+  </style>
+  <script>
+    function switchLang(lang) {
+      document.querySelectorAll('.lang').forEach(el => el.style.display = 'none');
+      document.querySelectorAll('.lang-' + lang).forEach(el => el.style.display = 'block');
+    }
+  </script>
+</head>
+
+<body onload="switchLang('th')">
+  <header>
+    <h1>Thailand Mathematical Modeling Challenge</h1>
+    <div class="lang-switch">
+      <button onclick="switchLang('th')">ภาษาไทย</button>
+      <button onclick="switchLang('en')">English</button>
+    </div>
+  </header>
+
+  <nav>
+    <a href="#what">What is Modeling?</a>
+    <a href="#process">Steps</a>
+    <a href="#examples">Examples</a>
+    <a href="#resources">Resources</a>
+    <a href="register.html">Register</a>
+  </nav>
+
+  <section id="what">
+    <h2 class="lang lang-th">แบบจำลองทางคณิตศาสตร์คืออะไร?</h2>
+    <h2 class="lang lang-en">What is Mathematical Modeling?</h2>
+    <p class="lang lang-th">
+      แบบจำลองทางคณิตศาสตร์ คือกระบวนการใช้คณิตศาสตร์ในการอธิบาย วิเคราะห์ หรือแก้ปัญหาในชีวิตจริง โดยอาศัยตัวแปร สมมุติฐาน และสมการในการแทนสถานการณ์จริง
+    </p>
+    <p class="lang lang-en">
+      Mathematical modeling is the process of using math to represent, analyze, and solve real-world problems through assumptions, variables, and equations.
+    </p>
+  </section>
+
+  <section id="process">
+    <h2 class="lang lang-th">ขั้นตอนการสร้างแบบจำลอง</h2>
+    <h2 class="lang lang-en">Modeling Process Steps</h2>
+
+    <div class="lang lang-th">
+      <ul>
+        <li>เข้าใจปัญหา: วิเคราะห์สถานการณ์จริง แปลความหมายในแง่ต่างๆ และแยกแยะปัญหาคืออะไร</li>
+        <li>ตั้งสมมติฐาน: กำหนดสิ่งที่ควรพิจารณาและตัดสิ่งที่ไม่จำเป็นหรือซับซ้อนออก เพื่อให้แก้ปัญหาได้ง่ายขึ้น</li>
+        <li>กำหนดตัวแปร: นิยามสิ่งที่ต้องการวัดหรือติดตาม เช่น ระยะทาง เวลา จำนวนคน</li>
+        <li>สร้างแบบจำลอง: ใช้กฎ ความสัมพันธ์ เพื่อสร้างสมการทางคณิตศาสตร์ที่อธิบายระบบ</li>
+        <li>คำนวณ / จำลอง: หาคำตอบโดยใช้การวิธีวิเคราะห์ โปรแกรมคำนวณ ประมาณค่าแบบจำลอง</li>
+        <li>ตรวจสอบและปรับปรุง: ทดสอบว่าแบบจำลองสอดคล้องกับความเป็นจริงและตอบโจทย์หรือไม่ ได้แนวทางปรับปรุงให้ดีขึ้น</li>
+        <li>นำเสนอผลลัพธ์: เขียนรายงาน สร้างกราฟ ตีความ แปลผล เชื่อมโยง และสื่อสารผลลัพธ์อย่างชัดเจน กระชับ</li>
+      </ul>
+    </div>
+
+    <div class="lang lang-en">
+      <ul>
+        <li>Understand the Problem: Analyze the real-world situation, read carefully, and identify what is being asked.</li>
+        <li>Make Assumptions: Simplify the problem by deciding what can be ignored or estimated.</li>
+        <li>Define Variables: Identify what quantities need to be tracked or related (e.g., time, distance, number of people).</li>
+        <li>Build the Model: Use math, laws and relationships to describe relationships between variables and construct system.</li>
+        <li>Solve or Simulate: Analytical and numerical computations, approximations to get model results.</li>
+        <li>Validate and Refine: Check if the model works well; compare it to reality and improve if needed.</li>
+        <li>Present Results: Report, graph, interpretation, making connection and clear visualization.</li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="examples">
+    <h2 class="lang lang-th">ตัวอย่างแบบจำลอง (เร็วๆ นี้)</h2>
+    <h2 class="lang lang-en">Modeling Examples (Coming Soon)</h2>
+    <p class="lang lang-th">เช่น แผงโซลาร์เซลล์ | การวางผังวัด | การจัดสรรที่ดินตามทฤษฎีใหม่</p>
+    <p class="lang lang-en">e.g. Solar panels | Temple zoning | Land use under New Theory</p>
+  </section>
+
+  <section id="resources">
+    <h2 class="lang lang-th">ลิงก์ความรู้เพิ่มเติม</h2>
+    <h2 class="lang lang-en">Learn More</h2>
+    <ul class="lang lang-th">
+      <li><a href="https://m3challenge.siam.org/what-is-math-modeling/" target="_blank">SIAM – แนวคิดการสร้างแบบจำลอง</a></li>
+      <li><a href="https://www.immchallenge.org" target="_blank">IMMC – การแข่งขันระดับนานาชาติ</a></li>
+    </ul>
+    <ul class="lang lang-en">
+      <li><a href="https://m3challenge.siam.org/what-is-math-modeling/" target="_blank">SIAM – What is Math Modeling?</a></li>
+      <li><a href="https://www.immchallenge.org" target="_blank">IMMC – Global Modeling Challenge</a></li>
+    </ul>
+  </section>
+
+  <footer>
+    &copy; 2025 Math Modeling Thailand | Powered by MMT team
+  </footer>
+
+</body>
+</html>
