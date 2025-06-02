@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://maleewong.github.io/web/sitemap.xml
