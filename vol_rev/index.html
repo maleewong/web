@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Volume of Revolution - Montri Maleewong</title>
+  <style>
+    /* ใช้ Style เดียวกับหน้าหลักเพื่อให้ Theme เหมือนกัน */
+    body {
+      font-family: 'Arial', sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background-color: #0073e6;
+      color: white;
+      text-align: center;
+      padding: 1rem 0;
+    }
+    nav {
+      display: flex;
+      justify-content: center;
+      background-color: #005bb5;
+      padding: 0.5rem;
+    }
+    nav a {
+      color: white;
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      margin: 0 0.5rem;
+      border-radius: 5px;
+    }
+    nav a:hover {
+      background-color: #004494;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 2rem auto;
+      padding: 1rem;
+      background-color: white;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .course-box {
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+      /* สีพื้นหลังธีม Calculus */
+      background-color: #e3f2fd;
+      border: 1px solid #bbdefb;
+    }
+    .course-box h2 {
+      margin-top: 0;
+      border-bottom: 2px solid rgba(0,0,0,0.1);
+      padding-bottom: 10px;
+      color: #005bb5;
+    }
+    .btn {
+      display: block;
+      background-color: #0073e6;
+      color: white;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      border-radius: 8px;
+      margin: 10px auto;
+      width: 100%;
+      max-width: 300px;
+      text-align: center;
+      font-size: 1rem;
+      transition: transform 0.2s ease, box-shadow 0.3s ease;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    }
+    .btn-back {
+        background-color: #6c757d;
+        max-width: 150px;
+        margin-top: 20px;
+    }
+    .btn-back:hover {
+        background-color: #5a6268;
+    }
+    
+    /* Grid Layout สำหรับ 8 ปุ่ม */
+    .grid-container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 15px;
+        margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Volume of Revolution</h1>
+    <p>Calculus: Visualizing Solids of Revolution</p>
+  </header>
+
+  <nav>
+    <a href="../index.html">Main</a>
+    <a href="../research.html">Research</a>
+    <a href="../courses.html">Courses</a>
+    <a href="../mmt/index.html">Math Modeling</a>
+  </nav>
+
+  <div class="container">
+
+    <div class="course-box">
+      <h2>Interactive 3D Examples</h2>
+      <p>Click on the buttons below to explore different solids of revolution. You can rotate, zoom, and inspect the cross-sections.</p>
+      
+      <div class="grid-container">
+          <a href="ex1.html" class="btn">Ex 1: Basic Area Rotation</a>
+          <a href="ex2.html" class="btn">Ex 2: Bounded Region (Y-axis)</a>
+          <a href="ex3.html" class="btn">Ex 3: Bounded Region (X-axis)</a>
+          <a href="sphere.html" class="btn">Sphere</a>
+          <a href="cone_mobile.html" class="btn">Cone</a>
+          <a href="torus.html" class="btn">Torus (Donut Shape)</a>
+          <a href="gabriels_horn.html" class="btn">Horn (1/x)</a>
+          <a href="heart_ring.html" class="btn">Heart Ring</a>
+      </div>
+
+      <hr style="margin-top: 30px; border: 0; border-top: 1px solid #ccc;">
+      
+      <a href="../courses.html" class="btn btn-back">⬅ Back to Courses</a>
+    </div>
+
+  </div>
+
+</body>
+</html>
