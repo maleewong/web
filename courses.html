@@ -49,13 +49,6 @@
     }
     .course-box h2 {
       margin-top: 0;
-      border-bottom: 2px solid rgba(0,0,0,0.1);
-      padding-bottom: 10px;
-    }
-    .course-box h3 {
-      margin-top: 20px;
-      color: #005bb5;
-      font-size: 1.1rem;
     }
     .calculus {
       background-color: #e3f2fd;
@@ -68,6 +61,11 @@
     .algebra {
       background-color: #fce4ec;
       border: 1px solid #f8bbd0;
+    }
+    /* เพิ่มคลาสสีใหม่สำหรับ System Dynamics (โทนส้ม/เหลืองอ่อน) */
+    .system-dynamics {
+      background-color: #fff3e0;
+      border: 1px solid #ffe0b2;
     }
     .btn {
       display: block;
@@ -96,12 +94,6 @@
       font-weight: bold;
       color: #fff;
     }
-    .button-grid {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 10px;
-    }
   </style>
 </head>
 <body>
@@ -114,7 +106,7 @@
     <a href="index.html">Main</a>
     <a href="research.html">Research</a>
     <a href="courses.html">Courses</a>
-    <a href="mmt/index.html">Math Modeling</a>
+	<a href="mmt/index.html">Math Modeling</a>
   </nav>
 
   <div class="container">
@@ -123,30 +115,17 @@
       <h2>Simple Algebra Skills</h2>
       <p>This section provides very basic algebra skills for high school students.</p>
       <a href="algebra_tiers/index.html" class="btn">📘 Explore Simple Algebra 1–6</a>
-      <div class="button-grid">
-          <a href="game_alg_simple/index.html" class="btn joy">🎮 Play Easy Match Game</a>
-          <a class="btn joy" href="game_number_tiles/index.html">🎮 Play Number Puzzle</a>
-          <a class="btn joy" href="game_snake/index.html">🎮 Play Snake Quiz Game</a>
-          
-          <a href="https://math-drill.streamlit.app/" class="btn joy" target="_blank">🧮 Math Drill (Streamlit)</a>
-      </div>
-    </div>
+      <a href="game_alg_simple/index.html" class="btn joy">🎮 Play Easy Match Game</a>
+      <a class="btn joy" href="game_number_tiles/index.html">🎮 Play Number Puzzle</a>
+      <a class="btn joy" href="game_snake/index.html">🎮 Play Snake Quiz Game</a>
+	</div>
 
     <div class="course-box calculus">
       <h2>Calculus</h2>
-      <p>This course covers many topics in calculus, including differentiation, integration, and 3D visualizations.</p>
-      
-      <h3>Surface & Curves</h3>
-      <div class="button-grid">
-          <a href="quadratic.html" class="btn">Quadratic Surface</a>
-          <a href="helix.html" class="btn">Circular Helix</a>
-          <a href="helix_spiral.html" class="btn">Spiral Helix</a>
-      </div>
-
-      <h3>Integration & Volume</h3>
-      <a href="vol_rev/index.html" class="btn">📦 Volume of Revolution Models</a>
-
-      <br>
+      <p>This course covers many topics in calculus, including differentiation and integration for functions of several variables and quadratic surfaces.</p>
+      <a href="quadratic.html" class="btn">Quadratic Surface</a>
+      <a href="helix.html" class="btn">Circular Helix</a>
+      <a href="helix_spiral.html" class="btn">Spiral Helix</a>
       <a href="https://montri.pythonanywhere.com" class="btn quiz">🧠 Calculus Quiz</a>
     </div>
 
@@ -155,6 +134,13 @@
       <p>This course covers a wide range of numerical methods for solving mathematical problems. Just try simple model.</p>
       <a href="sir_model_explaination.html" class="btn">SIR Model Explanation</a>
       <a href="sir_model_interactive.html" class="btn">SIR Model Interactive</a>
+    </div>
+
+    <!-- ส่วนที่เพิ่มใหม่สำหรับ System Dynamics -->
+    <div class="course-box system-dynamics">
+      <h2>System Dynamics Simulation</h2>
+      <p>Explore interactive system dynamics models. Build your own conceptual diagrams and run real-time mathematical simulations directly on the web.</p>
+      <a href="https://sys-sim.streamlit.app" target="_blank" class="btn">🚀 Open Simulator </a>
     </div>
 
   </div>
